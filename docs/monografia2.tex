@@ -1,0 +1,1267 @@
+%% abtex2-modelo-relatorio-tecnico.tex, v-1.9.2 laurocesar
+%% Copyright 2012-2014 by abnTeX2 group at http://abntex2.googlecode.com/ 
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% The Current Maintainer of this work is the abnTeX2 team, led
+%% by Lauro César Araujo. Further information are available on 
+%% http://abntex2.googlecode.com/
+%%
+%% This work consists of the files abntex2-modelo-relatorio-tecnico.tex,
+%% abntex2-modelo-include-comandos and abntex2-modelo-references.bib
+%%
+
+\documentclass[
+% -- opções da classe memoir --
+12pt,       % tamanho da fonte
+openright,      % capítulos começam em pág ímpar (insere página vazia caso preciso)
+oneside,      % para impressão em verso e anverso. Oposto a oneside
+a4paper,      % tamanho do papel. 
+% -- opções da classe abntex2 --
+%chapter=TITLE,   % títulos de capítulos convertidos em letras maiúsculas
+%section=TITLE,   % títulos de seções convertidos em letras maiúsculas
+%subsection=TITLE,  % títulos de subseções convertidos em letras maiúsculas
+%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+% -- opções do pacote babel --
+english,      % idioma adicional para hifenização
+french,       % idioma adicional para hifenização
+spanish,      % idioma adicional para hifenização
+brazil        % o último idioma é o principal do documento
+]{abntex2}
+
+\sloppy
+\clubpenalty=10000 % Para evitar linhas orfas
+\widowpenalty=10000 % Para evitar linhas viuvas
+\hyphenpenalty=10000 % Para não hifenizar
+
+% ---
+% PACOTES
+% ---
+
+% ---
+% Pacotes fundamentais 
+% ---
+\usepackage{lmodern}      % Usa a fonte Latin Modern
+\usepackage[T1]{fontenc}    % Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}   % Codificacao do documento (conversão automática dos acentos)
+\usepackage{indentfirst}    % Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}        % Controle das cores
+\usepackage{graphicx}     % Inclusão de gráficos
+\usepackage{microtype}      % para melhorias de justificação
+\usepackage{colortbl}
+\usepackage[font=normalsize,labelfont=bf]{caption} % tamanho de fonte do caption
+\usepackage{subfig}
+% ---
+
+% ---
+% Pacotes adicionais, usados no anexo do modelo de folha de identificação
+% ---
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{float}
+% ---
+  
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}       % para geração de dummy text
+% ---
+
+% ---
+% Pacotes de citações
+% ---
+\usepackage[brazilian,hyperpageref]{backref}   % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite} % Citações padrão ABNT
+% --- 
+% CONFIGURAÇÕES DE PACOTES
+% --- 
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+  \ifcase #1 %
+    Nenhuma citação no texto.%
+  \or
+    Citado na página #2.%
+  \else
+    Citado #1 vezes nas páginas #2.%
+  \fi}%
+% ---
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\titulo{Meta-aprendizado aplicado ao Problema de Reconhecimento de Expressões Faciais}
+\autor{Jorge Luis Melo Ribeiro}
+\orientador{Prof. Dr. Geraldo Braz Jr.}
+\local{São Luís - MA}
+\data{2018}
+\instituicao{
+    Curso de Ciência da Computação 
+    \par 
+    UFMA
+}
+
+\tipotrabalho{Monografia}
+% O preambulo deve conter o tipo do trabalho, o objetivo,   
+% o nome da instituição e a área de concentração 
+\preambulo{Monografia apresentada ao curso de Ciência da Computação da Universidade Federal do Maranhão, como parte dos requisitos necessários para obtenção do grau de Bacharel em Ciência da Computação.}
+% ---
+% O preambulo deve conter o tipo do trabalho, o objetivo, 
+% o nome da instituição e a área de concentração 
+%\preambulo{Modelo canônico de Relatório Técnico e/ou Científico em conformidade
+%com as normas ABNT apresentado à comunidade de usuários \LaTeX.}
+% ---
+
+% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+      %pagebackref=true,
+    pdftitle={\@title}, 
+    pdfauthor={\@author},
+      pdfsubject={\imprimirpreambulo},
+      pdfcreator={LaTeX with abnTeX2},
+    pdfkeywords={abnt}{latex}{abntex}{abntex2}{relatório técnico}, 
+    colorlinks=true,          % false: boxed links; true: colored links
+      linkcolor=blue,           % color of internal links
+      citecolor=blue,           % color of links to bibliography
+      filecolor=magenta,          % color of file links
+    urlcolor=blue,
+    bookmarksdepth=4
+}
+\makeatother
+% --- 
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% ---
+% compila o indice
+% ---
+\makeindex
+
+% ----
+% Início do documento
+% ----
+
+\begin{document}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+\selectlanguage{brazil}
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+% \pretextual
+
+% ---
+% Capa
+% ---
+\renewcommand{\imprimircapa}{%
+\begin{capa}%
+\center
+\includegraphics[scale=0.25]{logoufma.png} \\ 
+\vspace{1cm}
+\ABNTEXchapterfont\Large UNIVERSIDADE FEDERAL DO MARANHÃO \\
+\ABNTEXsectionfont\Large Curso de Ciência da Computação \\
+
+\vspace*{5cm}
+
+\begin{center}
+{\ABNTEXsectionfont\Large\imprimirautor} \\
+\vfill
+\ABNTEXchapterfont\bfseries\LARGE\imprimirtitulo
+\end{center}
+\vfill
+\large\imprimirlocal \\
+\large\imprimirdata
+\vspace*{1cm}
+\end{capa}
+} 
+
+\imprimircapa
+
+
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+\imprimirfolhaderosto
+
+% ---
+
+% ---
+% Anverso da folha de rosto:
+% ---
+
+%TODO: Quando pegar a ficha catalográfica no SIGAA
+%\includepdf{ficha_cat.pdf}
+
+% {
+
+%\ABNTEXchapterfont
+%\vspace*{\fill}
+
+%Conforme a ABNT NBR 10719:2011, seção 4.2.1.1.1, o anverso da folha de rosto
+%deve conter:
+%
+%\begin{alineas}
+%  \item nome do órgão ou entidade responsável que solicitou ou gerou o
+%   relatório; 
+%  \item título do projeto, programa ou plano que o relatório está relacionado;
+% \item título do relatório;
+%  \item subtítulo, se houver, deve ser precedido de dois pontos, evidenciando a
+%   sua subordinação ao título. O relatório em vários volumes deve ter um título
+%   geral. Além deste, cada volume pode ter um título específico; 
+%  \item número do volume, se houver mais de um, deve constar em cada folha de
+%   rosto a especificação do respectivo volume, em algarismo arábico; 
+%  \item código de identificação, se houver, recomenda-se que seja formado
+%   pela sigla da instituição, indicação da categoria do relatório, data,
+%   indicação do assunto e número sequencial do relatório na série; 
+%  \item classificação de segurança. Todos os órgãos, privados ou públicos, que
+%   desenvolvam pesquisa de interesse nacional de conteúdo sigiloso, devem
+%    informar a classificação adequada, conforme a legislação em vigor; 
+% \item nome do autor ou autor-entidade. O título e a qualificação ou a função
+%  do autor podem ser incluídos, pois servem para indicar sua autoridade no
+%   assunto. Caso a instituição que solicitou o relatório seja a mesma que o
+%   gerou, suprime-se o nome da instituição no campo de autoria; 
+%  \item local (cidade) da instituição responsável e/ou solicitante; NOTA: No
+%   caso de cidades homônimas, recomenda-se o acréscimo da sigla da unidade da
+%   federação.
+%  \item ano de publicação, de acordo com o calendário universal (gregoriano),
+%  deve ser apresentado em algarismos arábicos.
+%\end{alineas}
+
+%\vspace*{\fill}
+%}
+% ---
+
+%TODO: Após obter as assinaturas da banca, comente as linhas abaixo ou retire
+%\includepdf{assinaturas.pdf}
+
+
+\begin{folhadeaprovacao}
+
+  \begin{center}
+    {\ABNTEXchapterfont\large\imprimirautor}
+
+    \vspace*{\fill}\vspace*{\fill}
+    \begin{center}
+      \ABNTEXchapterfont\bfseries\Large\imprimirtitulo
+    \end{center}
+    \vspace*{\fill}
+    
+    \hspace{.45\textwidth}
+    \begin{minipage}{.5\textwidth}
+        \imprimirpreambulo
+    \end{minipage}%
+    \vspace*{\fill}
+  \end{center}
+        
+  Trabalho \_\_\_\_\_\_\_\_\_\_ em \imprimirlocal, \today:
+  
+  \assinatura{\textbf{\imprimirorientador} \\ Orientador} 
+  \assinatura{\textbf{Profa. MSca. Vandecia Rejane Monteiro Fernandes} \\ Examinadora}
+  \assinatura{\textbf{Prof. Dr. João Dallyson Sousa de Almeida} \\ Examinador}
+%   %\assinatura{\textbf{Professor} \\ Convidado 3}
+%   %\assinatura{\textbf{Professor} \\ Convidado 4}
+      
+  \begin{center}
+    \vspace*{0.5cm}
+    {\large\imprimirlocal}
+    \par
+    {\large\imprimirdata}
+    \vspace*{1cm}
+  \end{center}
+  
+\end{folhadeaprovacao}
+
+\begin{agradecimentos}
+
+Inicio agradecendo a aqueles que foram os principais responsáveis para que eu chegasse até aqui: Jorge Luis Pereira Ribeiro e Francisca Maria Melo Ribeiro. Sem o exemplo de meus pais eu não teria todas as virtudes que possuo e que recebi dos dois, dentre elas, as principais: respeito, responsabilidade, dedicação e amor. Ambos lutaram muito para que eu realizasse meus sonhos, e este de forma especial, a quem eu dedico inicialmente.
+
+A meus irmãos Marco André e Lucas Raphael, que cresceram comigo, sempre foram meus melhores amigos e nunca deixaram que nenhum mal atrapalhasse a união de nossa família.
+
+À minha namorada, Sammyra Camêlo, por apoiar minhas decisões e me dedicar palavras de força e encorajamento nos momentos em que eu fraquejava, e sempre ser uma perfeita companhia.
+
+Aos meus recém-afilhados, Allana e Felipe, que tornaram-se parte da minha família e com quem compartilho de belos momentos e ótimas lembranças.
+
+Aos meus grandes amigos (que são tantos que não poderia citar todos aqui), com quem consigo me sentir querido e por me ajudarem em diversos momentos que necessitei deles.
+
+Aos colegas de graduação, com quem vivi momentos de emoções diversas, mas que sempre foram apoio nas dificuldades acadêmicas. Em especial a Julia Manayra, que apesar da distância nesse final de graduação, sempre me dava bons conselhos quando nos encontrávamos pelos corredores da UFMA. Aos professores Dr. Alexandre César, Dr. Anselmo Paiva, Dra. Simara Rocha, por serem inspiração na minha vida acadêmica e me motivarem a buscar sempre o crescimento pessoal.
+
+Ao meu orientador, professor Dr. Geraldo Braz Junior, por também me inspirar e sempre orientar corretamente durante a graduação, principalmente nos últimos semestres, e tornar esse final de vida acadêmica mais fácil com seu apoio, dentro e fora de sala de aula.
+
+Por último a Deus, e não por menos importância, mas sim porque foi Ele quem me permitiu conhecer e viver ao lado de todas as pessoas mencionadas acima, além de iluminar e abençoar a minha vida em todos os momentos, me dando as graças necessárias para que eu alcançasse aquilo que eu mereço.
+
+\end{agradecimentos}
+
+% Epígrafe
+% ---
+\newpage
+\begin{epigrafe}
+    \vspace*{\fill}
+  \begin{flushright}
+    \textit{"Escolha um trabalho
+    \\que você ame
+    \\e não terás que trabalhar
+    \\um único dia na sua vida."}
+
+Confúcio
+  \end{flushright}
+\end{epigrafe}
+
+
+% ---
+% RESUMO
+% ---
+
+\setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
+\begin{resumo}
+
+De acordo com o professor de psicologia Albert Mehrabian, estudioso da área de comunicação humana, 90\% da expressão humana é não-verbal \cite{mehrabian1971silent}.  O homem, ao se comunicar, expressa de diversas formas aquilo que está sentido, especialmente através de reações. As reações faciais dão contexto e significado à fala humana, sendo os gestos executados de extrema importância para a compreensão do interlocutor. Diante disso, no contexto da evolução de sistemas inteligentes que tratam da interação com humanos, o entendimento correto da emoção sentida pelo homem pode auxiliar na resposta correta ou mais adequada retornada pelo sistema. Em muitos estudos e pesquisas se tem utilizado redes neurais para o treinamento e classificação de aplicações de aprendizado de máquina. Para se construir uma rede neural precisa-se primeiro escolher a sua arquitetura, sendo esta definida a partir de alguns parâmetros específicos, chamados de hiper-parâmetros. As redes neurais convolucionais (CNNs) são utilizadas especificamente para problemas que envolvem imagens como entrada de dados, e também precisam ter seus hiper-parâmetros definidos. A escolha e definição dos valores desses hiper-parâmetros é um problema a ser resolvido nas redes neurais, pois precisa ser feito de forma empírica. Alguns otimizadores já são utilizados para realizar a escolha dos melhores hiper-parâmetros, que fazem essa validação por tentativa e erro dentro de um espaço de busca. Alguns podem ser citados, como é o caso do \textit{Grid Search} e do \textit{Random Search}. Diante do exposto, a proposta deste trabalho é utilizar a biblioteca de otimização \textit{hyperopt} para otimizar os hiper-parâmetros de CNNs que irão realizar o treinamento e classificação de expressões faciais humanas.
+
+\noindent
+\textbf{Palavras-chaves}: redes neurais convolucionais, hiper-parâmetros, meta-aprendizado, \textit{hyperopt}
+
+\end{resumo}
+
+
+% resumo em inglês
+% \include{estrutura/resumo_en}
+\begin{resumo}[Abstract]
+  \begin{otherlanguage*}{english}
+  According to the psychology professor Albert Mehrabian, scholar in the human communication field, 90\% of the human expression is non-verbal \cite{mehrabian1971silent}. Humans, when communicating, express in several ways what he or she is feeling, specially through reactions. The facial reactions give context and meaning to the human speech, being the executed gestures of extreme importance to the comprehension of the interlocutor. With that said, in the context of evolution of intelligent systems that deal with interaction with humans, the correct comprehension of human's emotion can assist in the correct or more appropriate answer returned by the system. Many studies and researches have used neural networks for training and classification of machine learning applications. To build a neural network it is first necessary to choose its arquitecture, and this is defined with some specific parameters, called hyperparemeters. The convolutional neural networks (CNNs) are utilized specifically to problems that involve images as input, and also need to have their hyperparameters defined. The definition of these hyperparameters' values is a problem to be solved in neural networks, because it has to be done via rules-of-thumb. Some optimizers have being used to pick the best hyperparameters, and do the validation by trial and error within a search space. A few can be cited, such as Grid Search and Random Search. Based on the above, the proposal of this work is to utilize a optimization libray called hyperopt to optimize the hyperparemeters of CNNs that will train and classify human facial expressions.
+  
+  
+  \textbf{Keywords}: convolutional neural networks, hyperparameters, meta learning, hyperopt
+  \end{otherlanguage*}
+\end{resumo}
+
+% ---
+\cleardoublepage
+
+% ---
+% inserir lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+% ---
+
+
+% ---
+% inserir lista de tabelas
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+
+
+% ---
+% inserir lista de abreviaturas e siglas
+% ---
+\begin{siglas}
+\item[UFMA] \textit{Universidade Federal do Maranhão}
+\item[NCA] \textit{Núcleo de Computação Aplicada}
+\item[CNN] \textit{Convolutional Neural Network}
+\item[LBP] \textit{Local Binary Pattern}
+\item[SVN] \textit{Support Vector Machine}
+\item[LDA] \textit{Local Discriminant Analysis}
+\item[AAM] \textit{Active Appearance Model}
+\item[TPE] \textit{Tree-of-Parzen-Estimators}
+\item[RNA] \textit{Rede Neural Artificial}
+\item[RNP] \textit{Rede Neural Profunda}
+\item[GPU] \textit{Graphics Processing Unit}
+\item[ReLU] \textit{Rectified Linear Unit}
+\item[SMBO] \textit{Sequential Model-Based}
+\item[EI] \textit{Expected Improvement}
+\item[JAFFE] \textit{Japanese Female Facial Expression}
+\item[CK+] \textit{Extended Cohn Kanade}
+\end{siglas}
+
+% ---
+
+% ---
+% inserir lista de símbolos
+% ---
+%\begin{simbolos}
+%  \item[$ \in $] Pertence
+%\end{simbolos}
+% ---
+
+% ---
+% inserir o sumario
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+% ---
+
+\textual
+
+\chapter{Introdução} \label{introducao}
+Um dos campos de pesquisa de inteligência artificial diz respeito ao aperfeiçoamento da interação das máquinas com o homem. Antes do surgimento e popularização dos Sistemas Inteligentes, era mais comum que o usuário se adaptasse ao sistema que fizesse uso, aprendendo seu funcionamento e a forma  correta de utilização. Com os avanços obtidos nos estudos realizados em aprendizado de máquina, o papel de adaptação se inverteu. Os sistemas desenvolvidos para interagir com o homem buscam entender as necessidades do usuário e aprendem a partir do modo como são utilizados. 
+
+Nesse contexto, uma das formas que auxiliam no aprendizado de máquina é analisar e compreender o sentimento do homem. Para as empresas, por exemplo, é importante saber o que seus clientes pensam sobre seus serviços oferecidos \cite{pang2008opinion}, e por esse motivo investem em pesquisas de análise de sentimento a partir de textos extraídos principalmente da internet que dão opiniões sobre seus produtos ou serviços.
+
+Em um campo mais amplo, o reconhecimento automático de emoções em humanos tornou-se objeto de estudo de grande interesse nas últimas décadas. Tendo aplicações que vão desde a melhora da qualidade de trabalho de funcionários até o aprimoramento da experiência de usuário em websites \cite{kolakowska2014emotion}. A compreensão da emoção sentida pelo homem nas mais diversas situações é um grande passo para o aprimoramento de Sistemas Inteligentes construídos para este fim.
+
+Nessa linha, \citeonline{miskam2014humanoid} apresentou um estudo que utiliza um robô humanoide para interagir com crianças portadoras do Transtorno de Asperger, popularmente conhecido como autismo. O robô é capaz de reconhecer emoções e interagir com as crianças, que costumam apresentar dificuldades em comunicação, comportamento e interação social. O objetivo do estudo é proporcionar melhoras no desenvolvimento social e na resposta aos sentimentos de outras pessoas, tarefas as quais crianças autistas apresentam dificuldades em realizar.
+
+De forma específica dentro do estudo de reconhecimento de emoções, surgiu grande interesse no reconhecimento de expressões faciais de forma a aprimorar a interação humano-computador. Na última década, diversos trabalhos foram feitos nesse campo, como por exemplo \cite{sarode2010facial}, \cite{manglik2004facial} e \cite{bartlett2003real}. Nos três estudos é citada a dificuldade de se obter bons resultados, devido aos desafios que existem na tarefa de classificar emoções humanas. Alguns desses desafios são: a carência de \textit{datasets} extensos; a ambiguidade que uma expressão facial pode apresentar; a dificuldade dos computadores reconhecerem emoções faciais em situações naturais.
+    
+Além dos trabalhos citados no parágrafo anterior, outros autores buscaram diferentes métodos para resolver o problema do reconhecimento de expressões faciais. Antes da popularização das redes neurais profundas,  foram propostas diferentes técnicas para realizar a classificação das emoções. O trabalho \cite{shan2009facial} baseia-se na análise das expressões através de características \textit{Local Binary Pattern (LBP)}, e o aprendizado das emoções por meio de diferentes métodos como \textit{Template Matching}, \textit{Support Vector Machine (SVN)} e \textit{Linear Discriminant Analysis (LDA)}. Nesse trabalho os autores utilizaram o \textit{dataset} \textit{Cohn-Kanade} \cite{kanade2000comprehensive} gerado em laboratório sob condições controladas, obtendo acurácia acima de 90\% em algumas das classes.
+
+Uma outra técnica foi proposta por \cite{dhavalikar2014face} e consistia em três fases: detecção de face, extração de características e reconhecimento da expressão. A extração de características segmentava os principais elementos do rosto humano como olhos, nariz e boca, utilizando o método \textit{Active Appearance Model (AAM)}. Com os elementos segmentados, a expressão era reconhecida calculando-se a distância euclidiana entre os pontos dos segmentos, sendo esse valor comparado com a distância euclidiana de imagens de treinamento. A emoção que apresentasse menor diferença na comparação é então escolhida.
+
+Trabalhos mais recentes \cite{levi2015emotion}, \cite{mollahosseini2016going} e \cite{pramerdorfer2016facial} fizeram uso das redes neurais convolucionais (\textit{Convolutional Neural Networks} - CNN), uma classe de redes neurais que recebem imagens como entrada de dados, portanto úteis e adequadas para o problema de reconhecimento de expressões em imagens de faces. Esse método de \textit{Deep Learning} tem demonstrado grande capacidade de classificação em problemas de aprendizado de máquina. Essa demonstração pode ser verificada nos últimos resultados do \textit{ImageNet Challenge}, desafio que ocorre todos os anos e disponibiliza um dos maiores \textit{datasets} de imagens anotadas, que possui mais de 14 milhões de imagens \cite{deng2014scalable}. Nas últimas edições as redes neurais convolucionais estão alcançando resultados cada vez melhores, com a construção de variadas arquiteturas de CNNs em cada edição.
+
+Para se construir uma CNN, alguns aspectos importantes precisam ser levados em conta: dados que serão utilizados como entrada, tamanho do \textit{dataset}, quantidade de camadas, tamanho dos filtros das camadas convolucionais, porcentagem de \textit{dropout}, entre outros. Logo, para cada problema, a escolha desses parâmetros deve ser bem definida para que se consiga obter um bom resultado. No contexto das CNNs, existem alguns parâmetros de suma importância, além dos já citados anteriormente, que são definidos antes do treinamento da rede. Tais parâmetros estão estritamente ligados à arquitetura da CNN, e por isso são chamados de hiper-parâmetros. Após o grande crescimento das arquiteturas das CNNs em relação ao número de camadas, existe também a preocupação de se escolher os hiper-parâmetros de forma eficaz. Isso pode ser feito por algumas técnicas já conhecidas, como o \textit{Grid Search} e o \textit{Random Search} \cite{bergstra2011algorithms}. O \textit{Grid Search} é uma técnica de força-bruta, logo demanda muito tempo para ser executada. O \textit{Random Search} é semelhante ao \textit{Grid Search}, porém executa de forma estocástica e tem como proposta retornar os melhores hiper-parâmetros em menos tempo quando comparado ao \textit{Grid Search}.
+
+Estudos recentes de \cite{pinto2009high} e \cite{coates2011importance} demonstram que o desafio de otimizar os hiper-parâmetros em modelos profundos têm impedido o progresso científico. Por isso, seria adequado utilizar uma técnica em torno do processo de aprendizagem, de forma a realizar a escolha em um espaço de busca definido, que contenha intervalos específicos para cada hiper-parâmetro. Nesse contexto, uma biblioteca chamada de \textit{hyperopt} \cite{bergstra2013hyperopt} tem se popularizado. Nela, um espaço de busca é construído de forma estruturada e dois algoritmos de busca são fornecidos: \textit{Random Search} e \textit{Tree-of-Parzen-Estimators (TPE)} \cite{bergstra2011algorithms}.
+
+Diante da problemática do reconhecimento automático de expressões faciais, somada à dificuldade de escolha dos hiper-parâmetros das Redes Neurais Convolucionais, este trabalho propõe realizar a otimização dos hiper-parâmetros para arquiteturas de CNNs, as quais serão utilizadas para o treinamento e classificação de expressões faciais em imagens de rostos. Tanto o algoritmo de otimização quanto as arquiteturas escolhidas são discutidas no Capítulo \ref{fundamentacao}.
+
+\section{Objetivo} \label{objetivo}
+
+Com base no que foi introduzido, o principal objetivo deste trabalho é estimar os melhores hiper-parâmetros para arquiteturas de Redes Neurais Convolucionais, de forma a encontrar bons resultados no problema de reconhecimento de expressões faciais utilizando três \textit{datasets}: \textit{JAFFE} \cite{lyons1998coding}, \textit{CK+} \cite{lucey2010extended} e \textit{FERPlus} \cite{Barsoum2016}.
+
+\subsection{Objetivos Específicos} \label{objetivosespecificos}
+
+Especificamente este trabalho tem como objetivos:
+
+\begin{itemize}
+    \item Utilização da biblioteca de otimização \textit{hyperopt} para realizar a busca dos melhores hiper-parâmetros para as arquiteturas de CNN escolhidas;
+    \item Treinamento e classificação de emoções faciais por CNNs em sete classes: alegria, tristeza, nojo, medo, neutro, raiva e surpresa (no caso dos \textit{datasets} \textit{CK+} e \textit{FERPlus} há uma oitava classe: desprezo);
+    \item Verificação dos hiper-parâmetros que mais influenciam no treinamento das CNNs;
+    \item Observar o desempenho de diferentes arquiteturas de CNN no problema de reconhecimento de expressões faciais;
+    \item Utilização de três diferentes \textit{datasets} de forma a validar a metodologia;
+    \item Buscar resultados semelhantes ou melhores ao estado-da-arte para trabalhos que utilizem os mesmos \textit{datasets}.
+\end{itemize}
+
+\section{Contribuição} \label{contribuicao}
+
+As principais contribuições deste trabalho são:
+
+\begin{itemize}
+    \item Verificação comparativa do desempenho de diferentes arquiteturas de Redes Neurais Convolucionais e seus hiper-parâmetros;
+    \item Uso de Redes Neurais Convolucionais no reconhecimento de expressões faciais;
+    \item Método de meta-aprendizado em \textit{Deep Learning} pela seleção automática dos hiper-parâmetros das CNNs, para o problema de reconhecimento de expressões faciais.
+\end{itemize}
+
+\include{abntex2-modelo-include-comandos} 
+
+\chapter{Fundamentação Teórica} \label{fundamentacao}
+
+Neste capítulo são discutidos os principais conceitos utilizados na realização deste trabalho. Todos estão relacionados com \textit{Deep Learning}, como: Redes Neurais Convolucionais, Aprendizado de Máquina e hiper-parâmetros que compõem arquiteturas de Redes Neurais. Também será abordado o conceito de Meta-aprendizagem por meio da otimização automática dos hiper-parâmetros de CNNs. Dentro do conceito de Meta-aprendizagem, será feita uma explicação da biblioteca \textit{hyperopt} e de seus algoritmos de otimização.
+
+\section{Deep Learning} \label{deeplearning}
+
+\textit{Deep Learning} ou Aprendizado Profundo é um subcampo de Aprendizado de Máquina que consiste em algoritmos chamados de Redes Neurais Artificiais, pois são inspirados na estrutura e funcionamento do cérebro. O termo \textit{Deep} diz respeito à estrutura da Rede Neural Artificial (RNA), que é construída em camadas. Normalmente essas camadas são separadas entre camada de entrada, camada de saída e camada(s) escondida(s) (que ficam entre a entrada e a saída). Quanto mais camadas uma RNA possuir, mais profunda ela é. Essa estrutura pode ser visualizada na representação da Figura \ref{fig:neural_network}. Cada círculo representa um neurônio, e um conjunto de neurônios compõe uma camada.
+
+\begin{figure}[ht]
+\centering
+\caption{Representação da estrutura de um Neurônio (esquerda) e uma Rede Neural Artificial (direita).}
+\includegraphics[width=0.8\textwidth]{imagens/neural_network.png}
+\legend{\small Fonte: Adaptado de \cite{rna}}
+\label{fig:neural_network}
+\end{figure}
+
+O uso de RNAs para realizar tarefas de Aprendizado de Máquina se popularizou com o crescimento expressivo de dados disponíveis. Os modelos anteriores às RNAs lidavam com conjuntos pequenos de dados, logo, com o crescimento ocorrido nas últimas décadas, novos modelos eram necessários para processar o grande volume de dados existente. Outro fator que contribuiu para o crescimento de uso das RNAs foi o aumento do poder computacional, principalmente pelo uso de placas gráficas (\textit{GPUs}) para realizar o processamento dos dados de entrada. Essa mudança de paradigma é descrita no gráfico da Figura \ref{fig:why_deep_learning}.
+
+\begin{figure}[ht]
+\centering
+\caption{Gráfico comparativo de Deep Learning versus métodos anteriores de aprendizado.}
+\includegraphics[width=0.6\textwidth]{imagens/why_deep_learning.png}
+\legend{\small Fonte: \cite{whydeeplearning}}
+\label{fig:why_deep_learning}
+\end{figure}
+
+Outro grande benefício das RNAs é a sua habilidade de realizar a extração automática de características dos dados (\textit{Feature Learning}) \cite{bengio2012deep}. Em um outro trabalho de \citeonline{bengio2009learning}, a extração de características é explicada: métodos de \textit{Deep Learning} aprendem as características de forma hierárquica; as características são extraídas dos níveis mais altos até os níveis mais baixos. Dessa forma, as RNAs aprendem tais características em diferentes níveis de abstração, permitindo ao sistema aprender funções complexas sem depender de características extraídas de forma manual. 
+
+Os bons resultados alcançados pelas RNAs às popularizaram como um dos melhores métodos de Aprendizado de Máquina. Diversos problemas anteriores de Inteligência Artificial que persistiam ser insolucionáveis têm apresentado bons avanços quando aplicados em \textit{Deep Learning}. De forma especial, as RNAs produzem resultados promissores em tarefas de processamento de linguagem natural, e por este motivo, foram escolhidas para resolver o problema de classificação de emoções neste trabalho.
+
+\subsection{\textit{Feedforward} e \textit{Backpropagation}} \label{feed_back}
+
+Para melhor compreensão de como as Redes Neurais Profundas (RNP) realizam o Aprendizado de Máquina, é necessário primeiramente que dois conceitos sejam explicados: o \textit{Feedforward} e o \textit{Backpropagation}. Alguns autores chamam as RNPs de \textit{Feedforward Neural Networks}, porque os dados seguem na mesma direção por todas as camadas da rede, nas quais diversas computações são feitas sobre esses dados até chegar na última camada retornando uma saída. A Figura \ref{fig:feed_forward} exemplifica o fluxo de dados em uma RNP.
+
+\begin{figure}[ht]
+\centering
+\caption{Dados fluem em uma RNP da entrada [x1, x2, x3] para a saída [y1, y2], passando pelos neurônios [s1, s2, s3, s4, s5] das camadas centrais.}
+\includegraphics[width=0.6\textwidth]{imagens/feed_forward.png}
+\legend{\small Fonte: \cite{informationflow}}
+\label{fig:feed_forward}
+\end{figure}
+
+Cada ligação entre neurônios possui um peso associado. Cada neurônio recebe a informação dos neurônios que possua ligação na camada anterior, e processa esses dados junto ao peso da ligação. O resultado do cálculo obtido por esse neurônio é redirecionado aos neurônios que possui ligação na camada seguinte. Esse procedimento é feito por cada neurônio a partir da primeira camada escondida até a camada de saída, na qual o resultado é comparado à saída esperada por meio do cálculo do erro. O objetivo de uma RNP é diminuir esse erro, de forma a obter na saída o resultado mais próximo da classificação desejada. Esse procedimento é chamado de \textit{Feedforward}.
+
+Um erro associado é calculado para cada iteração de uma RNP. Esse erro é transferido de volta ao início da rede, para que os pesos de cada neurônio sejam corrigidos de acordo com a taxa de erro do neurônio relacionado, sendo a taxa calculada a partir da saída esperada. Esse processo de retorno do erro para correção dos pesos é chamado de \textit{Backpropagation}. O \textit{Feedforward} é o processo de transferência dos dados à frente, enquanto o \textit{Backpropagation} faz o caminho inverso, realizando a correção dos pesos.
+
+Os dados de entrada são processados pela RNP por um número finito de vezes (quantidade de épocas), até se alcançar uma acurácia desejada ou a taxa de erro ser igual ou menor a uma taxa mínima definida.
+
+\subsection{CNN} \label{cnn}
+
+Redes Neurais Convolucionais (CNN do inglês \textit{Convolutional Neural Networks}) \cite{lecun1989cnn} são um tipo especializado de Rede Neural projetadas para processar dados que estão na forma de múltiplos \textit{arrays}. Alguns exemplos desses dados são: sinais e sequências (uma dimensão), imagem ou áudio (duas dimensões), vídeos ou imagens volumétricas (três dimensões). A imagem é o tipo de dado mais comum utilizado como entrada em uma CNN. 
+
+O termo ``Rede Neural Convolucional'' indica que a rede faz uso de uma operação matemática chamada convolução. A convolução é um tipo específico de operação linear, utilizada no lugar das multiplicações de matrizes que são realizadas em uma Rede Neural comum.
+
+A arquitetura de uma CNN é estruturada como uma série de estágios, assim como a distribuição em camadas de uma RNP. Os primeiros estágios geralmente são compostos de dois tipos de camadas: camadas convolucionais e camadas \textit{pooling}. O objetivo da camada convolucional é detectar conjuntos de características dos dados recebidos da camada imediatamente anterior a ela, enquanto que a camada \textit{pooling} une as características detectadas que são semanticamente similares, realizando uma sub-amostragem dessas características. A seguir, veremos como as operações de convolução e \textit{pooling} são feitas em imagens.
+
+\subsubsection{Convolução} \label{convolucao}
+
+Como explicado na Subseção \ref{feed_back}, uma Rede Neural aprende características de cada classe a partir da correção dos pesos associados às ligações entre neurônios. No caso das CNNs, os pesos da rede estão associados nas camadas convolucionais por meio de conjuntos de filtros. Cada filtro é passado sobre a imagem recebida da camada anterior, resultando em um mapa de ativação de características daquele filtro. Intuitivamente, a rede irá aprender filtros que são ativados quando percebem algum tipo de característica visual na imagem como bordas, cores e padrões. Na Figura \ref{fig:conv_filter} é possível visualizar uma imagem de entrada e um filtro de ativação em forma de ``X'' da camada convolucional.
+
+\begin{figure}[ht]
+\centering
+\caption{Esquerda: imagem de entrada em uma CNN. Direita: exemplo de filtro de ativação.}
+\includegraphics[width=0.5\textwidth]{imagens/conv_filter.png}
+\legend{\small Fonte: Adaptado de \cite{conv_filter}}
+\label{fig:conv_filter}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\caption{Processo de convolução realizado pelo filtro (azul) sobre a imagem, resultando no mapa de características (laranja).}
+\includegraphics[width=0.6\textwidth]{imagens/convolution.png}
+\legend{\small Fonte: Adaptado de \cite{conv_filter}}
+\label{fig:convolution}
+\end{figure}
+
+Como notado na Figura \ref{fig:convolution}, a convolução é o resultado de uma soma ponderada local entre o filtro e a imagem, após esta ter sido percorrida totalmente pelo filtro. Definindo o tamanho do filtro (\textit{kernel}) menor que o tamanho da imagem permite que haja economia computacional, dado que apenas computações locais limitadas à área do filtro são feitas.
+
+Outra propriedade que garante a viabilidade do processamento de imagens nas CNNs é o compartilhamento de parâmetros. Em uma Rede Neural tradicional, cada elemento da matriz de pesos é usado exatamente uma vez quando se computa a saída de uma camada. No caso das CNNs os pesos são considerados interligados, pois o valor de um peso aplicado a uma entrada é ligado ao valor de outro peso aplicado em outro local da rede.
+
+\begin{figure}[ht]
+\centering
+\caption{Visualização do compartilhamento de parâmetros de uma CNN.}
+\includegraphics[width=0.5\textwidth]{imagens/parameter_sharing.png}
+\legend{\small Fonte: \cite{Goodfellow-et-al-2016}}
+\label{fig:paramater_sharing}
+\end{figure}
+
+Vê-se na Figura \ref{fig:paramater_sharing} uma descrição visual do funcionamento do compartilhamento de parâmetros. As setas pretas em destaque indicam conexões que utilizam um parâmetro em particular em dois diferentes modelos. Na imagem do topo, as setas pretas indicam o uso do elemento central de um \textit{kernel} de três elementos em um modelo convolucional. Observa-se que ele é utilizado repetidas vezes para diferentes entradas. Na imagem inferior, a seta preta indica o uso do elemento central de uma matriz de pesos em um modelo totalmente conectado. Esse último modelo não possui compartilhamento de parâmetros, por isso, o parâmetro é utilizado apenas uma única vez.
+
+\subsubsection{\textit{Pooling}} \label{pooling}
+
+Uma CNN é tipicamente composta de três estágios (Figura \ref{fig:conv_stages}). No primeiro estágio diversas convoluções são realizadas para produzir um conjunto de ativações lineares. Em seguida, cada ativação linear é passada por uma função de ativação não-linear, como por exemplo a ativação \textit{Rectifed Linear Unit (ReLU)}. Por último, a rede faz uso de uma função \textit{pooling} para modificar a saída da camada.
+
+\begin{figure}[ht]
+\centering
+\caption{Estágios de uma CNN típica.}
+\includegraphics[width=0.3\textwidth]{imagens/conv_stages.png}
+\legend{\small Fonte: Adaptado de \cite{Goodfellow-et-al-2016}}
+\label{fig:conv_stages}
+\end{figure}
+
+Uma função \textit{pooling} substitui a saída da rede em certo local por uma representação estatística. Por exemplo, a operação \textit{max pooling} \cite{Zhou-et-al-1988} retorna uma saída máxima em uma vizinhança retangular. Outra operação \textit{pooling} conhecida é \textit{average pooling} que retorna a média de uma vizinhança retangular.
+
+A operação \textit{max pooling} é a mais comum de ser utilizada em arquiteturas de CNN, e pode ser vista na Figura \ref{fig:pool_operation}. É possível notar em ambas as Figuras \ref{fig:pool_f1} e \ref{fig:pool_f2} que ao final, uma sub-amostragem da imagem dada como entrada é retornada pela operação \textit{pooling}. É importante mencionar que a quantidade de dados devolvida após a operação é significantemente reduzida sem grandes perdas, tornando viável a utilização dessa operação para realização de sub-amostragem dos mapas de ativação.
+
+\begin{figure}[ht]
+\centering
+\caption{Demonstração da operação \textit{max pooling}.}
+\subfloat[]{\includegraphics[width=0.35\textwidth]{imagens/pool.jpeg}\label{fig:pool_f1}}
+\hfill
+\subfloat[]{\includegraphics[width=0.6\textwidth]{imagens/maxpool.jpeg}\label{fig:pool_f2}}
+\legend{\small Fonte: \cite{pool_operation}}
+\label{fig:pool_operation}
+\end{figure}
+
+\subsection{Hiper-parâmetros} \label{hiperparametros}
+
+Modelos de Redes Neurais, tanto comuns quanto convolucionais, são parametrizados por um conjunto de hiper-parâmetros que precisam ser escolhidos apropriadamente de forma a maximizar o processo de aprendizagem. Os hiper-parâmetros são utilizados para configurar diversos aspectos do algoritmo de aprendizagem e podem ter efeitos variados no modelo resultante e na sua performance \cite{ClaesenM15}.
+
+Para que fique mais claro, é válido primeiramente diferenciar o que são parâmetros e hiper-parâmetros de um modelo. Parâmetros são valores que precisam ser estimados dos dados utilizados como entrada. Tais valores não costumam ser definidos manualmente e podem ser salvos ao final do processo de aprendizagem. Os pesos aprendidos por uma rede neural ao final de um treinamento, por exemplo, são definidos como parâmetros de um modelo.
+
+Já os hiper-parâmetros são valores externos ao modelo que não podem ser estimados a partir dos dados de entrada. Eles influenciam diretamente nos processos que realizam a estimativa dos parâmetros de um modelo, e são definidos manualmente por quem realiza a modelagem, a partir de conhecimento empírico ou pela realização de testes em conjuntos de hiper-parâmetros.
+
+Alguns exemplos de hiper-parâmetros de redes neurais já foram mencionados na seção \ref{introducao}, e para a modelagem de arquiteturas vários outros precisam ser levados em conta. Os hiper-parâmetros mais comuns para Redes Neurais Convolucionais (objeto desse trabalho) são:
+
+\begin{itemize}
+    \item Quantidade de filtros convolucionais
+    \item Tamanho dos filtros convolucionais
+    \item Tipo de ativação (\textit{relu}, \textit{elu}, \textit{tanh}, \textit{sigmoid})
+    \item Tamanho do \textit{pooling}
+    \item Salto do \textit{Stride} (passo)
+    \item Porcentagem de \textit{dropout}
+    \item Uso de \textit{Batch Normalization}
+    \item Tamanho do \textit{batch} de treinamento
+\end{itemize}
+
+\section{Meta-aprendizagem} \label{metaaprendizagem}
+
+O paradigma tradicional em aprendizado de máquina é adquirir um grande \textit{dataset} e treinar um novo modelo utilizando esse \textit{dataset}. A decisão de escolha do \textit{dataset}, modelo a ser utilizado e seus hiper-parâmetros está totalmente relacionada a quem realiza a modelagem, a partir de suas experiências e aprendizado anteriores. Meta-aprendizado (do inglês \textit{meta-learning}) é um tópico recente de pesquisa direcionado ao problema de ``aprender a aprender''. Seu objetivo é aperfeiçoar a performance de algoritmos de aprendizagem existentes por meio da auto-decisão de variáveis que compõem o problema.
+
+O conceito chave de sistemas de aprendizagem é o aperfeiçoamento por experiência. Como explicado por \citeonline{vanschoren2010understanding}, o ``meta-aprendizado monitora o processo de aprendizagem automático, no contexto dos problemas de aprendizado que ele encontra, e tenta adaptar seu comportamento para se aperfeiçoar.''
+
+O trabalho de \citeonline{Lemke2015} enumera dois requisitos que definem um sistema de meta-aprendizagem:
+
+\begin{itemize}
+    \item Um sistema de meta-aprendizagem precisa incluir um subsistema de aprendizagem.
+    \item A experiência é obtida pela exploração da meta-informação extraída:
+    \begin{itemize}
+        \item em um episódio anterior de aprendizagem em um único dataset e/ou
+        \item de diferentes domínios ou problemas.
+    \end{itemize}
+\end{itemize}
+
+Meta-aprendizagem pode ser empregada em uma variedade de configurações, com certa discordância na literatura sobre quais configurações constituem ou não problemas de meta-aprendizado. Este trabalho, no entanto, seguirá  os requisitos citados anteriormente, e que estão agrupados no diagrama da Figura \ref{fig:meta_learning_system}. Cada um dos três círculos relaciona-se aos pontos dos requisitos (obtenção de experiência, meta-aprendizado com um único \textit{dataset}, meta-aprendizado em diferentes domínios).
+
+\begin{figure}[ht]
+\centering
+\caption{Componentes de um sistema de meta-aprendizado.}
+\includegraphics[width=0.6\textwidth]{imagens/meta_learning_system.png}
+\legend{\small Fonte: \cite{Lemke2015}}
+\label{fig:meta_learning_system}
+\end{figure}
+
+Para este trabalho, o sistema de meta-aprendizagem se dará pela estimação automática de valores para hiper-parâmetros de Redes Neurais Convolucionais, sendo as CNNs o subsistema de aprendizagem a ser utilizado. A experiência será obtida pela realização de diversos treinamentos de CNN, onde variados valores de hiper-parâmetros serão testados buscando o melhor resultado (menor perda e maior acurácia) para os datasets escolhidos. Esse sistema fará uso da biblioteca de otimização automática \textit{Hyperopt}, objeto da subseção a seguir.
+
+\subsection{\textit{Hyperopt}} \label{hyperopt}
+
+Avanços recentes no estado da arte de resultados em classificação de imagens têm sido obtidos pelo aperfeiçoamento de configurações de técnicas existentes, no lugar da criação de novas abordagens que realizem o aprendizado de características \cite{bergstra2011algorithms}. Tradicionalmente, a busca dos hiper-parâmetros que compõem um modelo é feita manualmente, por meio de visualizações anteriores \cite{Hinton2012}, \cite{Hsu2003APG} ou pelo teste de conjuntos de hiper-parâmetros em uma grade de opções predefinidas \cite{Pedregosa2011}. 
+
+Tais abordagens, no entanto, deixam a desejar em termos de reprodução e são impraticáveis quando o número de hiper-parâmetros é extenso \cite{ClaesenM15}. Devido tais falhas, a ideia de automatizar a busca de hiper-parâmetros tem recebido grande atenção em aprendizado de máquina recentemente. Processos automatizados de busca já têm demonstrado melhor capacidade quando comparados à busca manual em diversos problemas \cite{Bergstra2011}, \cite{Bergstra2012}.
+
+No contexto desse problema surge uma biblioteca chamada \textit{Hyperopt} \cite{bergstra2013hyperopt} com o objetivo de realizar a busca otimizada de hiper-parâmetros sobre espaços de busca predefinidos, que podem incluir valores de dimensão real, discreta ou condicional. A biblioteca utiliza a otimização \textit{Sequential model-based (SMBO)}, também conhecida como otimização Bayesiana \cite{Pelikan1999}, que é, segundo os criadores do \textit{Hyperopt}, um dos métodos mais eficientes de otimização existente.
+
+O ponto chave que diferencia a busca realizada pelo \textit{SMBO} do \textit{Grid Search} e do \textit{Random Search} é que estes últimos desconsideram qualquer busca feita anteriormente pelo fato de não serem otimizados. Métodos \textit{SMBO} funcionam a partir da busca do próximo conjunto de hiper-parâmetros a ser avaliado na função objetivo pela seleção dos hiper-parâmetros que sobressaíram em uma função probabilística substituta (chamada de função \textit{surrogate}), que é menos custosa de ser avaliada. Caso os hiper-parâmetros avaliados apresentem bons resultados também na função objetivo, eles são incorporados ao conjunto de melhores hiper-parâmetros.
+
+Existem cinco aspectos que fazem parte de um método de otimização \textit{SMBO} (alguns já citados no parágrafo anterior):
+
+\begin{itemize}
+    \item Um domínio de hiper-parâmetros no qual a busca é realizada
+    \item Uma função objetivo que utiliza os valores dos hiper-parâmetros e retorna uma saída que pode ser maximizada ou minimizada
+    \item Uma função \textit{surrogate} (substituta) da função objetivo
+    \item Um critério de avaliação de quais hiper-parâmetros devem ser escolhidos em seguida a partir da função \textit{surrogate}
+    \item Um histórico que consiste em um par \{score, hiper-parâmetros\} utilizado pelo algoritmo para atualizar a função \textit{surrogate}
+\end{itemize}
+
+Em seu artigo, \citeonline{bergstra2013hyperopt} explicam que métodos \textit{SMBO} são aplicados em cenários nos quais o usuário deseja minimizar o valor de uma função que possui avaliação custosa, seja em termos de tempo ou custo. Algumas vantagens do \textit{SMBO} são enumeradas:
+
+\begin{itemize}
+    \item Lida com variáveis reais, discretas ou condicionais
+    \item Capaz de realizar avaliações paralelas de uma função
+    \item Lida com centenas de variáveis, mesmo que precise realizar também centenas de avaliações de funções
+\end{itemize}
+
+A biblioteca \textit{Hyperopt} fornece dois algoritmos de busca de hiper-parâmetros: \textit{Random Search} \cite{Bergstra2012} e \textit{Tree-structured Parzen Estimator (TPE)} \cite{bergstra2011algorithms}, que será explicado na Subseção \ref{tpe} pois foi o algoritmo escolhido para realizar as buscas dos melhores espaços de hiper-parâmetros neste trabalho. 
+
+A biblioteca é, em geral, indicada para resolver qualquer problema \textit{SMBO}, no entanto, seus autores afirmam que a desenvolveram com o intuito de otimizar os hiper-parâmetros de Redes Neurais Profundas e Redes Neurais Convolucionais. A sua utilização se dá por: a) definição de uma função objetivo a ser minimizada, b) definição de um espaço de busca de hiper-parâmetros, c) decisão do algoritmo de busca (\textit{random} ou \textit{tpe}). Com esses três pontos definidos, basta realizar a chamada do método \textit{fmin} para iniciar a busca. A biblioteca ainda é capaz de executar paralelamente em \textit{cluster} para realizar buscas mais rápidas, por meio de um banco de dados \textit{MongoDB}.
+
+Além do \textit{Hyperopt}, existem outras bibliotecas que realizam tarefas de meta-aprendizado em Redes Neurais como é o caso de \cite{NNI}, que além de realizar buscas otimizadas em espaços de hiper-parâmetros, também faz a busca de melhores arquiteturas de Redes Neurais para determinados problemas. Tarefa semelhante é realizada por \citeonline{liu2018darts}, que trabalha na modelagem de arquiteturas especificamente para CNNs.
+
+\subsubsection{\textit{Tree-structured Parzen Estimator}} \label{tpe}
+
+\textit{Tree-structured Parzen Estimator} (\textit{TPE}) \cite{bergstra2011algorithms} é um método \textit{SMBO} que em suas iterações realiza a coleta de novas observações, e ao fim da iteração decide de forma otimizada qual conjunto de parâmetros ele deve testar na sequência. Sendo um método \textit{SMBO}, ele segue os cinco aspectos citados na Subseção \ref{hyperopt}, empregando uma função \textit{surrogate} própria e tendo como critério de avaliação o Aperfeiçoamento Esperado (do inglês \textit{Expected Improvement - EI}).
+
+Para iniciá-lo, é necessário primeiramente definir uma distribuição inicial de hiper-parâmetros. Esse conjunto normalmente é uma distribuição uniforme, porém também é possível associar qualquer hiper-parâmetro com uma distribuição estocástica. Em suas primeiras iterações, como não há nenhuma informação conhecida do espaço de busca, é realizado uma busca aleatória em cima dos intervalos de hiper-parâmetros, para assim obter resultados que podem ser avaliados.
+
+Após obter alguns resultados com a busca aleatória, o \textit{TPE} é então iniciado. As observações coletadas até então são divididas em dois grupos: o primeiro grupo contém as observações com os melhores \textit{scores} enquanto que o segundo grupo contém o restante das observações. O objetivo é encontrar um conjunto de hiper-parâmetros que é mais provável de estar no primeiro grupo e menos provável de estar no segundo grupo.
+
+O próximo passo é calcular a probabilidade de um candidato estar em cada um dos dois grupos. Dos candidatos já obtidos, o algoritmo tenta encontrar um candidato que é mais provável de ser encontrado no primeiro grupo e menos provável de estar no segundo grupo. A fórmula a seguir define o \textit{Expected Improvement} para cada um dos candidatos:
+
+\[EI(x) = \frac{l(x)}{g(x)}\]
+
+Sendo $l(x)$ é a probabilidade de estar no primeiro grupo e $g(x)$ a probabilidade de estar no segundo grupo. A cada iteração do algoritmo, as distribuições tornam-se mais esparsas, como pode ser visto na Figura \ref{fig:tpe_distribution}. A seleção dos melhores hiper-parâmetros formam um espaço em árvore (o que dá o nome ao algoritmo), na qual a descida dos caminhos no grafo formam o caminho de decisão percorrido pelo algoritmo.
+
+\begin{figure}[ht]
+\centering
+\caption{Distribuição de probabilidades do algoritmo \textit{TPE}.}
+\includegraphics[width=0.6\textwidth]{imagens/tpe_distribution.png}
+\legend{\small Fonte: \cite{TPEWilliam}}
+\label{fig:tpe_distribution}
+\end{figure}
+
+\chapter{Metodologia} \label{metodologia}
+
+Neste capítulo serão apresentadas as técnicas e métodos que serão utilizados para a realização deste trabalho.
+A metodologia consistirá em etapas bem definidas, que são: (1) Aquisição de \textit{datasets}; (2) Pré-processamento dos \textit{datasets} adquiridos; (3) Escolha das arquiteturas de CNN para realização dos treinamentos; (4) Treinamento e validação de cada arquitetura escolhida em cada \textit{dataset}; (5) Seleção de arquitetura a realizar otimização de hiper-parâmetros a partir dos resultados da etapa anterior; (6) Definição de espaço de busca de hiper-parâmetros para cada arquitetura selecionada; (7) Treinamento, validação e otimização (execução) das CNNs. A Figura \ref{fig:diagrama_metodologia} apresenta as etapas citadas e descritas nas seções a seguir.
+  
+\begin{figure}[ht]
+\centering
+\caption{Metodologia proposta.}
+\includegraphics[width=1\textwidth]{imagens/diagrama_metodologia.png}
+\legend{\small Fonte: Elaborado pelo autor}
+\label{fig:diagrama_metodologia}
+\end{figure}
+
+Todos os experimentos foram realizados em uma máquina do Núcleo de Computação Aplicada (NCA) da UFMA, dedicada para a execução de aplicações de Aprendizado de Máquina. Ela possui duas placas gráficas NVIDIA GeForce GTX 1080 Ti, uma das mais poderosas atualmente. Não foi necessário utilizar ambas as placas paralelamente, pois apenas uma era capaz de processar os dados recebidos pelas CNNs em tempo hábil.
+
+\section{Aquisição de datasets} \label{aquisicao}
+
+A primeira etapa desta metodologia foi dedicada à aquisição dos três \textit{datasets} que serão utilizados nesse trabalho: JAFFE \cite{lyons1998coding}, Extended Cohn-Kanade (CK+) \cite{lucey2010extended} e FERPlus \cite{Barsoum2016}. Todos são disponibilizados publicamente na internet pelos seus respectivos autores.
+
+A escolha destes \textit{datasets} está relacionada com o vasto uso dos mesmos em trabalhos de reconhecimento de expressões faciais, e dessa forma é possível comparar seus resultados com os que serão obtidos neste trabalho. Os aspectos de cada \textit{dataset} serão discutidos nas subseções a seguir.
+
+\subsection{JAFFE: \textit{The Japanese Female Facial Expression}} \label{jaffe}
+
+Este \textit{dataset} é um dos mais utilizados em trabalhos de reconhecimento de expressões faciais \cite{shan2009facial, sarode2010facial, shanli2018}. Ele contém 213 imagens de 10 pessoas de etnia japonesa do sexo feminino, e foi gerado em laboratório para a validação da metodologia do trabalho de \citeonline{lyons1998coding}.
+
+Cada imagem possui apenas um canal e tem dimensões 256x256 pixels. As sete emoções presentes nesse \textit{dataset} são: neutro, alegria, tristeza, surpresa, raiva, nojo e medo. Na Figura \ref{fig:jaffe} podem ser vistos exemplos de imagens de expressões faciais do \textit{dataset} de um mesmo indivíduo.
+
+\begin{figure}[ht]
+\centering
+\caption{Exemplos de imagens do \textit{dataset} JAFFE.}
+\includegraphics[width=0.8\textwidth]{imagens/jaffe.png}
+\legend{\small Fonte: Adaptado de \cite{lyons1998coding}}
+\label{fig:jaffe}
+\end{figure}
+
+\subsection{CK+: \textit{The Extended Cohn-Kanade Dataset}} \label{ck+}
+
+Esta é a segunda versão do \textit{dataset} Cohn-Kanade, publicado em 2000 \cite{kanade2000comprehensive}, e que foi liberado para pesquisadores com o intuito de promover pesquisas de detecção automática de expressões faciais. Este primeiro \textit{dataset} tornou-se um dos utilizados neste campo de pesquisa por conta das limitações apresentadas pelos \textit{datasets} existentes na época da publicação. Ele contém 2105 sequências de imagens de 182 indivíduos adultos de diferentes etnias.
+
+A popularidade deste primeiro \textit{dataset} estimulou seus autores a construírem uma extensão dele: o Extended Cohn-Kanade (CK+) \cite{lucey2010extended}. Esta segunda versão apresenta um aumento de 22\% no número de sequências de imagens e 27\% no número de indivíduos. As oito emoções presentes nesse \textit{dataset} são: neutro, raiva, desprezo, nojo, medo, alegria, tristeza e surpresa.
+
+Diferentemente do JAFFE, o CK+ não apresenta imagens individuais de cada emoção, e sim sequências de imagens que iniciam da emoção neutra até o pico de expressão apresentado na última imagem, como pode ser visto na Figura \ref{fig:ck}. A quantidade de imagens (\textit{frames}) que cada sequência possui é variável. A forma como cada sequência de \textit{frames} foi processada será discutida na Seção \ref{preprocessamento}. As sequências diferem na dimensão dos \textit{frames}, sendo algumas de dimensão 640x480 pixels e outras 640x490 pixels. Também há diferença quanto à quantidade de canais, pois a maioria apresenta apenas um canal, enquanto que outras possuem três canais.
+
+\begin{figure}[ht]
+\centering
+\caption{Exemplo de sequência de \textit{frames} do \textit{dataset} CK+.}
+\includegraphics[width=0.8\textwidth]{imagens/ck.jpg}
+\legend{\small Fonte: \cite{jia2013}}
+\label{fig:ck}
+\end{figure}
+
+\subsection{FERPlus} \label{ferplus}
+
+O \textit{dataset} FER2013 \cite{goodfellow2013challenges} foi disponibilizado a partir de um \textit{challenge} da plataforma de desafios Kaggle, no ano de 2013 \cite{kaggle}. Ele possui mais de 30 mil imagens de rostos \textit{in-the-wild} divididas em conjuntos de treino, teste e validação, e já foi utilizado em diversos trabalhos relacionados com o reconhecimento de expressões faciais \cite{kampel2016, shanli2018}. Atualmente é um dos maiores \textit{datasets} anotados disponíveis publicamente.
+
+Uma versão aprimorada do FER2013 foi publicada pela Microsoft no ano de 2016, chamado de FERPlus \cite{Barsoum2016}. A proposta dos autores foi aperfeiçoar as anotações do FER2013, fornecendo uma distribuição de probabilidade de emoções para cada imagem. A forma como essa distribuição foi trabalhada para a coleta das anotações será discutida na Seção \ref{preprocessamento}. Este \textit{dataset} contém oito emoções: neutro, alegria, surpresa, tristeza, raiva, nojo, medo e desprezo.
+
+Os autores do FERPlus afirmam que o \textit{dataset} FER2013 possui diversos erros de anotação, indicando de forma errada a emoção presente em determinadas imagens. Na Figura \ref{fig:ferplus} é possível visualizar as novas anotações que o FERPlus apresenta para diferentes emoções. Todas as imagens deste \textit{dataset} possuem um canal e dimensão 48x48 pixels.
+
+\begin{figure}[ht]
+\centering
+\caption{Comparação entre anotações dos \textit{datasets} FER2013 (acima) e FERPlus (abaixo).}
+\includegraphics[width=0.8\textwidth]{imagens/ferplus.png}
+\legend{\small Fonte: \cite{Barsoum2016}}
+\label{fig:ferplus}
+\end{figure}
+
+\section{Pré-processamento} \label{preprocessamento}
+
+Nesta seção serão descritos os processos realizados em cada \textit{dataset} de forma a prepará-los para os futuros treinamentos das CNNs e otimização dos seus hiper-parâmetros. Cada processo será explicado separadamente para cada um dos \textit{datasets} selecionados para este trabalho.
+
+\subsection{JAFFE} \label{preprocessamento-jaffe}
+
+O \textit{dataset} JAFFE não fornece um arquivo de anotações pronto para o aprendizado supervisionado. Logo, o primeiro passo foi gerar as anotações para cada uma das 213 imagens. Os nomes dos arquivos  presentes no \textit{dataset} indicam qual emoção presente em cada uma das imagens, como pode ser visto na Figura \ref{fig:jaffe_examples}.
+
+\begin{figure}[ht]
+\centering
+\caption{Visualização dos nomes das imagens presentes no dataset JAFFE.}
+\includegraphics[width=0.65\textwidth]{imagens/jaffe_examples.png}
+\legend{\small Fonte: Elaborado pelo autor}
+\label{fig:jaffe_examples}
+\end{figure}
+
+O nome do arquivo é separado por três pontos, e a sigla lida após o primeiro ponto indica qual a emoção de determinada imagem. Logo, na primeira fileira da Figura \ref{fig:jaffe_examples} as anotações das imagens são: medo (FE: \textit{Fear}), alegria (HA: \textit{Happy}) e alegria novamente. Um simples \textit{script} de leitura de arquivos facilitou a extração das 213 anotações do \textit{dataset}.
+
+A etapa seguinte do pré-processamento foi realizar um corte na imagem, de forma a extrair apenas a região do rosto dos indivíduos, excluindo o fundo e regiões do cabelo. Esse processo foi feito por meio de um algoritmo de detecção de faces, sendo utilizada neste trabalho a biblioteca MTCNN (\textit{Multi-task Cascaded Convolutional Networks}) \citeonline{mtcnn}, que utiliza CNNs para a detectar uma região retangular que compreende as faces encontradas na imagem.
+
+Por fim, com todas as imagens devidamente anotadas e recortadas na região do rosto, foi feito um redimensionamento das mesmas para o tamanho 150x112 pixels (originalmente eram 256x256 pixels).  Na Figura \ref{fig:jaffe_group} é possível visualizar três imagens após o pré-processamento. Ao fim, o \textit{dataset} foi dividido entre conjunto de treino (80\%) e conjunto de teste (20\%).
+
+\begin{figure}[ht]
+\centering
+\caption{Exemplos de imagens do JAFFE após o pré-processamento.}
+\includegraphics[width=0.1\textwidth]{imagens/jaffe1.png}
+\includegraphics[width=0.1\textwidth]{imagens/jaffe2.png}
+\includegraphics[width=0.1\textwidth]{imagens/jaffe3.png}
+\legend{\small Fonte: Elaborado pelo autor}
+\label{fig:jaffe_group}
+\end{figure}
+
+\subsection{CK+} \label{preprocessamento-ck+}
+
+O \textit{dataset} CK+ fornece as anotações para cada sequência de imagens em arquivos de texto. Será feita a leitura desses arquivos para extrair a emoção correspondente à sua respectiva sequência. De acordo com a documentação do \textit{dataset}, algumas sequências não possuem uma anotação específica, e estas serão descartadas nessa etapa.
+
+As demais sequências que possuem uma anotação correspondente serão tratadas da seguinte forma:
+
+\begin{itemize}
+    \item O primeiro \textit{frame} da sequência será armazenado como emoção neutra.
+    \item Pelo fato das sequências possuírem quantidades variadas de \textit{frames}, a partir do \textit{frame} (tamanho da sequência / 2) + 2 em diante serão armazenados de acordo com a emoção correspondente.
+    \item Entre o primeiro \textit{frame} e o \textit{frame} (tamanho da sequência / 2) + 2 sobrarão algumas imagens de transição. Estes serão descartados.
+\end{itemize}
+
+Por exemplo: uma sequência possui 11 \textit{frames}. O \textit{frame} 1 será emoção neutra, enquanto que a partir do \textit{frame} 7 até o último \textit{frame} (pico de expressão), serão armazenados com a emoção correspondente no seu arquivo de anotação. A Figura \ref{fig:ck+_group} abaixo demonstra a divisão de uma sequência de \textit{frames} específica.
+
+\begin{figure}[ht]
+\centering
+\caption{Seleção da primeira imagem (acima, emoção neutra) e demais imagens selecionadas de uma sequência (abaixo, emoção correspondente).}
+\includegraphics[width=0.17\textwidth]{imagens/ck1.png}
+
+\includegraphics[width=0.17\textwidth]{imagens/ck2.png}
+\includegraphics[width=0.17\textwidth]{imagens/ck3.png}
+\includegraphics[width=0.17\textwidth]{imagens/ck4.png}
+\includegraphics[width=0.17\textwidth]{imagens/ck5.png}
+\includegraphics[width=0.17\textwidth]{imagens/ck6.png}
+\legend{\small Fonte: Elaborado pelo autor}
+\label{fig:ck+_group}
+\end{figure}
+
+O algoritmo MTCNN também é utilizado neste \textit{dataset} para realizar o corte da região do rosto de cada imagem, realizando em seguida o redimensionamento para 150x112 pixels e conversão para apenas um canal (\textit{grayscale}), nas imagens que apresentarem três canais. O CK+, assim como o JAFFE, foi dividido entre conjunto de treino e teste na mesma proporção: 80\% e 20\% respectivamente.
+
+\subsection{FERPlus} \label{preprocessamento-ferplus}
+
+O FERPlus já é disponibilizado pelos seus autores dividido entre conjunto de treino e conjunto de teste. O conjunto de treino possui 28.709 imagens, enquanto que o conjunto de teste possui 3.589 imagens.
+
+Como já mencionado Subseção \ref{ferplus}, as anotações são disponibilizadas na forma de uma distribuição de emoção apresentada em cada imagem. O arquivo de anotação é no formato .csv, e cada linha é relacionada a uma imagem do \textit{dataset}. Uma linha deste arquivo de anotação indica em suas colunas, respectivamente: (1) o nome da imagem correspondente; (2) a dimensão da imagem (todas são 48x48 pixels); (3) das colunas 3 a 10, a pontuação que indica o nível de emoção sentida na imagem, seguindo a ordem neutro, alegria, surpresa, tristeza, raiva, novo, medo e desprezo; (4) a coluna 11 indica se a imagem não possui uma face ou o rosto não está bem enquadrado. Na Figura \ref{fig:ferplus_labels} demonstra-se o conteúdo do arquivo de anotações para o conjunto de teste.
+
+\begin{figure}[ht]
+\centering
+\caption{Visualização do arquivo .csv que contém a distribuição de emoções para o FERPlus.}
+\includegraphics[width=0.8\textwidth]{imagens/ferplus_labels.png}
+\legend{\small Fonte: Elaborado pelo autor}
+\label{fig:ferplus_labels}
+\end{figure}
+
+A emoção anotada para cada imagem é a que apresentar maior pontuação, fazendo a leitura das colunas 3 a 10 do arquivo de anotações. Caso a maior pontuação se repita em alguma outra coluna (por exemplo, 5 para surpresa, 5 para medo), a imagem será descartada. Também será descartada caso seja indicado na coluna 11 que a imagem não possui rosto bem definido.
+
+Este \textit{dataset}, assim como os anteriores, também é submetido ao procedimento de detecção de faces via MTCNN, para remoção de imagens que não forem detectadas faces bem enquadradas, além de realizar um corte na região do rosto das imagens em que a face for encontrada. Por fim, será realizado o redimensionamento das imagens para 44x34 pixels. Após todo o pré-processamento descrito acima, o conjunto de treino foi armazenado com 22.125 imagens e o conjunto de teste com 2.752 imagens.
+
+Por conta da sua extensão e prevendo o longo tempo de espera para realizar treinamentos neste \textit{dataset}, foi optado neste trabalho a criação de versões menores do mesmo. Foram gerados dois novos \textit{datasets}: um de tamanho médio, com 11.062 imagens de treino e 1.376 imagens de teste e um de tamanho pequeno, com 5.531 imagens de treino e 688 imagens de teste. Estes dois \textit{datasets} serão úteis quando for necessário realizar treinamentos mais rápidos.
+
+\section{Escolha das arquiteturas de CNN} \label{escolha-arquiteturas}
+
+O processo de definição das arquiteturas foi baseado em conhecimento empírico. Três arquiteturas de CNN foram selecionadas para este trabalho: SimpleNet \cite{hasanpour2016lets}, VGG \cite{simonyan2014very} e ResNet \cite{he2016deep}. A escolha foi baseada em uma ordem de grandeza dessas arquiteturas, objetivando utilizar as com menos camadas para os menores \textit{datasets} e as com mais camadas para os maiores \textit{datasets}.
+
+A rede neural convolucional SimpleNet é a mais recente entre as escolhidas, e seus autores propuseram uma arquitetura simples, como o próprio nome da CNN indica, e com menos camadas, que pudesse ter resultados melhores ou equiparáveis às arquiteturas populares como VGG, ResNet e GoogleNet \cite{szegedy2015going}. É possível visualizar a estrutura da SimpleNet na Figura \ref{fig:simplenet}. Como resultado, obtém-se menor número de parâmetros e operações. Em seu artigo, \citeonline{hasanpour2016lets} realizaram testes nos \textit{datasets} CIFAR10, CIFAR100 e MNIST, obtendo resultados melhores que os obtidos com arquiteturas consideradas mais robustas.
+
+\begin{figure}[ht]
+\centering
+\caption{Visualização das camadas da arquitetura da SimpleNet.}
+\includegraphics[width=1\textwidth]{imagens/simplenet.jpg}
+\legend{\small Fonte: \cite{hasanpour2016lets}}
+\label{fig:simplenet}
+\end{figure}
+
+As arquiteturas VGG-16 e VGG-19, desenvolvidas pelo \textit{Visual Geometry Group} em 2014 apresentam bons resultados em variadas aplicações de \textit{Deep Learning}, e têm como principal contribuição o aumento de profundidade de arquitetura, quando comparadas às arquiteturas de anos anteriores, e também pela utilização de filtros convolucionais 3x3. A numeração 16 e 19 indica o nível de profundidade de ambas as arquiteturas, sendo que a arquitetura de profundidade 19 possui três camadas convolucionais extras.
+
+A arquitetura da ResNet talvez seja a que apresente maior peculiaridade dentre as escolhidas para este trabalho. Ela é considerada mais profunda quando comparada com a SimpleNet e VGG, possuindo até 152 camadas: 8 vezes mais que a VGG. Sua grande profundidade foi devida a observação dos seus autores de que quanto mais profunda a arquitetura, maior a acurácia obtida no treinamento. O diferencial da ResNet é a implementação do conceito de \textit{Deep Residual Learning}. Isso quer dizer que no lugar de empilhar camadas uma a uma, as camadas são encaixadas formando um mapeamento residual.
+
+Essa nova implementação gerou o que se chama de aprendizado residual (\textit{residual learning}). Ao invés de enviar para a próxima camada o resultado obtido do processamento da camada anterior, é enviado a concatenação desse processamento com a identidade, que seria o que foi recebido pela camada antes do processamento. Para melhor entendimento, um bloco residual que realiza essa operação é demonstrado na Figura \ref{fig:residual_block}.
+
+\begin{figure}[ht]
+\centering
+\caption{Um bloco residual da ResNet.}
+\includegraphics[width=0.5\textwidth]{imagens/residual_block.png}
+\legend{\small Fonte: \cite{he2016deep}}
+\label{fig:residual_block}
+\end{figure}
+
+Neste trabalho, foram utilizadas as seguintes versões da ResNet: ResNet-18, ResNet-34, ResNet-50 e ResNet-152.
+
+\section{Treinamento e validação das arquiteturas} \label{treinamento-arquiteturas}
+
+Nessa etapa foram realizados diversos treinamentos entre as arquiteturas selecionadas e os \textit{datasets} escolhidos, para que fosse possível selecionar qual arquitetura será escolhida para ter seus hiper-parâmetros otimizados para determinado \textit{dataset}.
+
+Algumas arquiteturas foram treinadas mais de uma vez para um mesmo \textit{dataset}, com modificações no número de épocas e no tamanho do \textit{batch}. Para fins de simplificação, apenas os melhores resultados de cada arquitetura em cada \textit{dataset} serão considerados e mostrados na Tabela \ref{tab:resultados-treinamento}.
+
+Nota-se também pela Tabela \ref{tab:resultados-treinamento} que algumas arquiteturas não foram testadas em todos os \textit{datasets}, como é o caso da VGG-19 e ResNet de tamanhos 34, 50 e 152. A VGG-19 foi treinada uma vez com o \textit{dataset} FERPlus para verificar se era possível obter resultados melhores que os obtidos com a VGG-16, o que não ocorreu.
+
+No caso da ResNet, como foi possível notar que o JAFFE e o CK+ não foram bem sucedidos na ResNet-18, obtendo baixas porcentagens de teste, foi decidido não realizar treinamentos nas arquiteturas mais profundas com 34, 50 e 152 camadas.
+
+\begin{table}[H]
+\centering
+\caption{Resultados dos treinamentos de cada arquitetura em cada \textit{dataset}. (A) corresponde à acurácia de treinamento e (V) corresponde à acurácia de teste.}
+\label{tab:resultados-treinamento}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+                    & \textbf{JAFFE}  & \textbf{CK+}    & \textbf{FERPlus} \\ \midrule
+\textbf{SimpleNet}  & A: 99\% V: 87\% & A: 98\% V: 95\% & A: 96\% V: 75\%  \\
+\textbf{VGG-16}     & A: 87\% V: 65\% & A: 99\% V: 95\% & A: 98\% V: 78\%  \\
+\textbf{VGG-19}     & Não realizado   & Não realizado   & A: 98\% V: 77\%  \\
+\textbf{ResNet-18}  & A: 98\% V: 53\% & A: 99\% V: 87\% & A: 96\% V: 72\%  \\
+\textbf{ResNet-34}  & Não realizado   & Não realizado   & A: 96\% V: 75\%  \\
+\textbf{ResNet-50}  & Não realizado   & Não realizado   & A: 90\% V: 66\%  \\
+\textbf{ResNet-152} & Não realizado   & Não realizado   & A: 93\% V: 71\%  \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Importante mencionar que a metodologia de escolha das arquiteturas por ordem de grandeza, de modo que as menores fossem utilizadas com os menores \textit{datasets}, e as maiores fossem utilizadas com os maiores \textit{datasets} foi confirmada por meio dos treinamentos realizados nesta etapa. A partir destes resultados, foi possível realizar a seleção das arquiteturas que terão seus hiper-parâmetros otimizados, processo que será feito e descrito na Seção \ref{selecao-arquiteturas} a seguir.
+
+\section{Seleção de arquitetura a ser otimizada em cada \textit{dataset}} \label{selecao-arquiteturas}
+
+Pelos resultados obtidos nos treinamentos realizados e que podem ser vistos na Tabela \ref{tab:resultados-treinamento}, foi possível escolher qual a arquitetura será otimizada para cada um dos \textit{datasets}. A escolha foi feita simplesmente pela verificação do melhor resultado de acurácia de treinamento e teste.
+
+A Tabela \ref{tab:selecao-arquiteturas} resume as arquiteturas que terão seus hiper-parâmetros otimizados, esperando melhores resultados dos que os apresentados na Tabela \ref{tab:resultados-treinamento}. Era esperado que a arquitetura ResNet retornasse o melhor resultado para o \textit{dataset} FERPlus, devido sua grande quantidade de imagens, combinada à extensão desta arquitetura. No entanto, a arquitetura VGG-16 apresentou melhor acurácia tanto no treinamento como no teste, e foi escolhida para ser otimizada em dois \textit{datasets}: CK+ e FERPlus.
+
+\begin{table}[H]
+\centering
+\caption{Arquitetura selecionada para otimização dos hiper-parâmetros para cada \textit{dataset}.}
+\label{tab:selecao-arquiteturas}
+\begin{tabular}{@{}cc@{}}
+\toprule
+\textbf{Dataset} & \textbf{Arquitetura} \\ \midrule
+JAFFE            & SimpleNet            \\
+CK+              & VGG-16               \\
+FERPlus          & VGG-16               \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\section{Definição de espaço de busca de hiper-parâmetros} \label{definicao-espaco-busca}
+
+O espaço de busca de hiper-parâmetros precisa ser construído obedecendo a estrutura do \textit{hyperopt}. Essa tarefa pode ser feita de várias formas, porém a forma mais comum é instanciar um dict em Python, nomeando cada hiper-parâmetro e definindo seu intervalo de busca. 
+
+Um espaço de busca distinto precisará ser construído para cada arquitetura utilizada, devido ao fato de que cada arquitetura possuir estrutura própria. Logo, as arquiteturas escolhidas precisam ser bem compreendidas, de forma a selecionar os melhores hiper-parâmetros que irão compor o espaço de busca e seus respectivos intervalos. Um exemplo de espaço de busca para o \textit{hyperopt} pode ser visto na Figura \ref{fig:search_space}.
+
+\begin{figure}[ht]
+\centering
+\caption{Exemplo de um espaço de busca definido para uma \textit{Multilayer Perceptron}.}
+\includegraphics[width=1\textwidth]{imagens/search_space.png}
+\legend{\small Fonte: Elaborado pelo autor}
+\label{fig:search_space}
+\end{figure}
+
+Ambas as arquiteturas SimpleNet e VGG-16 possuem hiper-parâmetros semelhantes, no entanto foi necessária a criação de espaços de busca distintos para cada uma. Como foi utilizada a biblioteca Keras para construção de cada CNN, os valores ou intervalos que poderiam ser utilizados em cada hiper-parâmetro foram extraídos da documentação da biblioteca, obedecendo as opções que a mesma disponibiliza.
+
+Para a SimpleNet, os seguintes hiper-parâmetros foram inseridos no espaço de busca: tipo de ativação, tamanho do \textit{batch} de treinamento, um multiplicador para o tamanho de filtro de convolução, o tipo de inicializador para o \textit{kernel} de convolução, tamanho do \textit{kernel} de convolução, porcentagem de \textit{dropout}, tipo de otimizador, tamanho do filtro de \textit{pooling} e salto do \textit{pooling}. O espaço de busca criado pode ser visualizado na Figura \ref{fig:space_simplenet}.
+
+\begin{figure}[ht]
+\centering
+\caption{Espaço de busca de hiper-parâmetros definido para a SimpleNet.}
+\includegraphics[width=1\textwidth]{imagens/space_simplenet.png}
+\legend{\small Fonte: Elaborado pelo autor}
+\label{fig:space_simplenet}
+\end{figure}
+
+Neste espaço de busca, alguns hiper-parâmetros foram definidos com um valor fixo, como é o caso do preenchimento (\textit{padding}) da convolução e do \textit{pooling}, uso de aumento de dados (\textit{data augmentation}) e uso de \textit{batch normalization}. Essa decisão foi tomada baseada na conveniência da arquitetura, pois notou-se em treinamentos prévios que a variação desses hiper-parâmetros afetava de forma negativa os resultados obtidos.
+
+O espaço de busca da VGG-16 visto na Figura \ref{fig:space_vgg_16} apesar de semelhante ao da SimpleNet, apresenta diferenças nos intervalos em alguns hiper-parâmetros: tamanho do \textit{batch} de treino, opção de utilizar ou não aumento de dados, porcentagem de \textit{dropout}, tipo de otimizador, e não há uma opção definida para \textit{batch normalization}, pois a arquitetura não utiliza esta técnica.
+
+\begin{figure}[ht]
+\centering
+\caption{Espaço de busca de hiper-parâmetros definido para a VGG-16.}
+\includegraphics[width=1\textwidth]{imagens/space_vgg_16.png}
+\legend{\small Fonte: Elaborado pelo autor}
+\label{fig:space_vgg_16}
+\end{figure}
+
+Com estes dois espaços de busca construídos, passamos para a última etapa desta metodologia, que é a otimização e seleção dos hiper-parâmetros para cada uma das arquiteturas, utilizando os três \textit{datasets} como entrada nas mesmas. Este processo é descrito na Seção a seguir.
+
+\section{Treinamento, validação e otimização dos hiper-parâmetros das CNNs} \label{trein-valid-otimizacao}
+
+Na última etapa desta metodologia serão realizados os testes propostos, nos quais a biblioteca \textit{hyperopt} será utilizada para otimizar os hiper-parâmetros de cada arquitetura, e a mesma também irá realizar as chamadas aos treinamentos que serão feitos pela biblioteca \textit{Keras}, que também é responsável pela construção das arquiteturas. 
+
+O \textit{hyperopt} tem como parâmetros no seu método de minimização \textit{fmin}: o método que constrói e realiza o treinamento da CNN, o espaço de busca a ser utilizado, o algoritmo de otimização (no caso deste trabalho, o TPE foi utilizado), um objeto \textit{trials} que armazena os resultados e hiper-parâmetros selecionados de cada avaliação e um inteiro que representa quantas avaliações serão feitas.
+
+A quantidade de épocas dos treinamentos nos \textit{datasets} CK+ e FERPlus foi fixada em 100, e o número de avaliações em 10. No JAFFE foi definido que o treinamento seria feito em 500 épocas, com 20 avaliações. O tempo que levará para otimização irá depender da complexidade da arquitetura e do tamanho dos dados de entrada. Ao final da otimização, os melhores hiper-parâmetros serão armazenados em um arquivo JSON. No Capítulo a seguir serão reunidos e apresentados os resultados obtidos com a metodologia adotada.
+
+\chapter{Resultados} \label{resultados}
+
+Neste capítulo serão apresentados os resultados obtidos pela aplicação da metodologia proposta. O principal objetivo é comparar os resultados obtidos pela otimização automatizada dos hiper-parâmetros por meio da meta-aprendizagem com os resultados obtidos sem otimização.
+
+Nas Seções seguintes os resultados alcançados em cada \textit{dataset} serão discutidos e detalhados. Cada Seção seguirá a mesma organização, exibindo e comparando os resultados das arquiteturas padrões de cada CNN com a arquitetura otimizada, além de tabelas que irão diferenciar os modelos originais dos modelos otimizados.
+
+\section{Resultados obtidos com a base JAFFE} \label{resultados-jaffe}
+
+Primeiramente é válido relembrar que este \textit{dataset} obteve melhores resultados em treinamentos feitos na arquitetura SimpleNet. Pelo estudo da arquitetura e explicação de \citeonline{hasanpour2016lets}, o espaço de busca foi definido e apresentado na Figura \ref{fig:space_simplenet}.
+
+Como já mencionado na Seção \ref{trein-valid-otimizacao}, foi definido que a otimização seria limitada em 20 avaliações e o treinamento em 500 épocas. Nestas configurações, o processo completo de otimização durou cerca de 6 horas, com auxílio do hardware descrito no início do Capítulo \ref{metodologia}.
+
+Nota-se na Tabela \ref{tab:resultados-jaffe}, que a acurácia no treinamento não obteve mudanças, o que não se faz tão necessário, dado o alto valor de porcentagem obtido em ambos. A acurácia de teste, no entanto, cresceu em 8 pontos percentuais, demonstrando que o processo de otimização dos hiper-parâmetros da SimpleNet foi válido e garantiu melhora no resultado.
+
+\begin{table}[H]
+\centering
+\caption{Resultados obtidos para o treinamento do JAFFE com a SimpleNet regular e SimpleNet com arquitetura otimizada.}
+\label{tab:resultados-jaffe}
+\begin{tabular}{@{}ccc@{}}
+\toprule
+\textbf{Hiper-parâmetros} & \textbf{Acurácia de Treinamento} & \textbf{Acurácia de Teste} \\ \midrule
+Sem otimização            & 99\%              & 87\%               \\
+Com otimização            & 99\%              & 95\%               \\ \bottomrule
+\end{tabular}
+\end{table}
+
+A Tabela \ref{tab:comparacao-simplenet-jaffe} apresenta um esboço da arquitetura final otimizada para \textit{Jaffe}. A ordem das camadas é a mesma tanto para a arquitetura regular quanto para a arquitetura otimizada. As mudanças estão nos hiper-parâmetros de cada camada. Nota-se a diferença na quantidade de filtros e o tamanho do \textit{kernel} nas camadas convolucionais; na porcentagem de dropout; no tamanho da sub-amostragem e \textit{strides} nas camadas \textit{pooling}.
+
+\begin{table}[H]
+\centering
+\caption{Visualização das camadas que compõem a arquitetura regular (esquerda) e arquitetura otimizada (direita) da SimpleNet para o \textit{dataset} JAFFE.}
+\label{tab:comparacao-simplenet-jaffe}
+\begin{tabular}{@{}cc@{}}
+\toprule
+\textbf{Arquitetura regular} & \textbf{Arquitetura otimizada} \\ \midrule
+Conv2D (64, 3x3)                  & Conv2D (54, 2x2)                    \\
+BatchNorm                    & BatchNorm                      \\
+Dropout (0.2)                & Dropout (0.2253)               \\
+Conv2D (128, 3x3)                 & Conv2D (108, 2x2)                   \\
+BatchNorm                    & BatchNorm                      \\
+Dropout (0.2)                & Dropout (0.2253)               \\
+Conv2D (128, 3x3)                 & Conv2D (108, 2x2)                   \\
+BatchNorm                    & BatchNorm                      \\
+Dropout (0.2)                & Dropout (0.2253)               \\
+Conv2D (128, 3x3)                 & Conv2D (108, 2x2)                   \\
+BatchNorm                    & BatchNorm                      \\
+MaxPool (2x2, strides 2)     & MaxPool (3x3, strides 4)       \\
+Dropout (0.2)                & Dropout (0.2253)               \\
+Conv2D (128, 3x3)                 & Conv2D (108, 2x2)                   \\
+BatchNorm                    & BatchNorm                      \\
+Dropout (0.2)                & Dropout (0.2253)               \\
+Conv2D (128, 3x3)                 & Conv2D (108, 2x2)                   \\
+BatchNorm                    & BatchNorm                      \\
+Dropout (0.2)                & Dropout (0.2253)               \\
+Conv2D (256, 3x3)                 & Conv2D (216, 2x2)                   \\
+MaxPool (2x2, strides 2)     & MaxPool (3x3, strides 4)       \\
+BatchNorm                    & BatchNorm                      \\
+Dropout (0.2)                & Dropout (0.2253)               \\
+Conv2D (256, 3x3)                 & Conv2D (216, 2x2)                   \\
+BatchNorm                    & BatchNorm                      \\
+Dropout (0.2)                & Dropout (0.2253)               \\
+Conv2D (256, 3x3)                 & Conv2D (216, 2x2)                   \\
+BatchNorm                    & BatchNorm                      \\
+Dropout (0.2)                & Dropout (0.2253)               \\
+MaxPool (2x2, strides 2)     & MaxPool (3x3, strides 4)       \\
+Conv2D (512, 3x3)                 & Conv2D (433, 2x2)                   \\
+BatchNorm                    & BatchNorm                      \\
+Dropout (0.2)                & Dropout (0.2253)               \\
+Conv2D (2048, 3x3)                & Conv2D (1735, 2x2)                  \\
+Dropout (0.2)                & Dropout (0.2253)               \\
+Conv2D (256, 3x3)                 & Conv2D (216, 2x2)                   \\
+MaxPool (2x2, strides 2)     & MaxPool (3x3, strides 4)       \\
+Dropout (0.2)                & Dropout (0.2253)               \\
+Conv2D (256, 3x3)                 & Conv2D (216, 2x2)                   \\
+MaxPool (2x2, strides 2)     & MaxPool (3x3, strides 4)       \\ 
+Dense (3072)                 & Dense (5440)                   \\ \hline
+\end{tabular}
+\end{table}
+
+Outros hiper-parâmetros escolhidos pelo otimizador são: tipo de ativação (\textit{ReLu}), tamanho do \textit{batch} (20), inicializador do \textit{kernel} (\textit{random uniform}) e otimizador (\textit{adadelta}). Todos os hiper-parâmetros escolhidos podem ser vistos na Figura \ref{fig:space_jaffe}. Houve também uma grande diferença na quantidade total de parâmetros processados, devido a redução de quantidade de filtros convolucionais, e que são apresentados na Tabela \ref{tab:comparacao-parametros-simplenet-jaffe}.
+
+\begin{table}[H]
+\centering
+\caption{Comparação entre quantidade de parâmetros calculados para SimpleNet regular e SimpleNet otimizada para treinamentos com o \textit{dataset} JAFFE.}
+\label{tab:comparacao-parametros-simplenet-jaffe}
+\begin{tabular}{@{}cc@{}}
+\toprule
+\textbf{Tipo}         & \textbf{Quantidade de parâmetros} \\ \midrule
+Arquitetura regular   & 5.515.015                         \\
+Arquitetura otimizada & 2.375.540                         \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\caption{Melhores hiper-parâmetros escolhidos para treinamento do JAFFE com a SimpleNet.}
+\includegraphics[width=0.6\textwidth]{imagens/space_jaffe.png}
+\legend{\small Fonte: Elaborado pelo autor}
+\label{fig:space_jaffe}
+\end{figure}
+
+
+
+\section{Resultados obtidos com a base CK+} \label{resultados-ck+}
+
+Dentre os \textit{datasets} selecionados, o CK+ foi o que obteve os melhores resultados de acurácia, tanto para a arquitetura regular quanto para a arquitetura otimizada. A arquitetura VGG-16 foi escolhida para ter seus hiper-parâmetros otimizados para este \textit{dataset}, dado que se sobressaiu sobre as outras, como pode ser revisto na Tabela \ref{tab:resultados-treinamento}.
+
+O processo de meta-aprendizagem para o CK+ durou cerca de 10 horas, com treinamentos de 100 épocas e o otimizador realizando 10 avaliações. A Tabela \ref{tab:resultados-ck+} apresenta a comparação entre os treinamentos para a VGG-16 regular e VGG-16 otimizada. Apesar dos bons resultados já obtidos sem a otimização, foi possível alcançar alguma melhora tanto na acurácia de treinamento quanto na acurácia de teste com a arquitetura otimizada, obtendo evolução de 1\% e 2\%, respectivamente.
+
+\begin{table}[H]
+\centering
+\caption{Resultados obtidos para o treinamento do CK+ com a VGG-16 regular e VGG-16 com arquitetura otimizada.}
+\label{tab:resultados-ck+}
+\begin{tabular}{@{}ccc@{}}
+\toprule
+\textbf{Hiper-parâmetros} & \textbf{Acurácia de Treinamento} & \textbf{Acurácia de Teste} \\ \midrule
+Sem otimização            & 99\%              & 95\%               \\
+Com otimização            & 100\%             & 97\%               \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Na Tabela \ref{tab:comparacao-vgg16-ck+} é feita a comparação entre a arquitetura regular e a arquitetura otimizada da VGG-16 para o CK+. É possível notar as diferenças entre quantidade de filtros convolucionais e tamanho do \textit{kernel} dos mesmos, além do tamanho das sub-amostragens e \textit{strides} nas camadas \textit{pooling}. Também há mudança na porcentagem de \textit{dropout} na arquitetura otimizada.
+
+\begin{table}[H]
+\centering
+\caption{Visualização das camadas que compõem a arquitetura regular (esquerda) e arquitetura otimizada (direita) da VGG-16 para o \textit{dataset} CK+.}
+\label{tab:comparacao-vgg16-ck+}
+\begin{tabular}{@{}cc@{}}
+\toprule
+\textbf{Arquitetura regular} & \textbf{Arquitetura otimizada} \\ \midrule
+Conv2D(64, 3x3)              & Conv2D (53, 2x2)                \\
+Conv2D (64, 3x3)              & Conv2D (53, 2x2)                \\
+MaxPool (2x2, strides 2)     & MaxPool (3x3, strides 3)       \\
+Conv2D (128, 3x3)             & Conv2D (106, 2x2)               \\
+Conv2D (128, 3x3)             & Conv2D (106, 2x2)               \\
+MaxPool (2x2, strides 2)     & MaxPool (3x3, strides 3)       \\
+Conv2D (256, 3x3)             & Conv2D (213, 2x2)               \\
+Conv2D (256, 3x3)             & Conv2D (213, 2x2)               \\
+Conv2D (256, 3x3)             & Conv2D (213, 2x2)               \\
+MaxPool (2x2, strides 2)     & MaxPool (3x3, strides 3)       \\
+Conv2D (512, 3x3)             & Conv2D (427, 2x2)               \\
+Conv2D (512, 3x3)             & Conv2D (427, 2x2)               \\
+Conv2D (512, 3x3)             & Conv2D (427, 2x2)               \\
+MaxPool (2x2, strides 2)     & MaxPool (3x3, strides 3)       \\
+Conv2D (512, 3x3)             & Conv2D (427, 2x2)               \\
+Conv2D (512, 3x3)             & Conv2D (427, 2x2)               \\
+Conv2D (512, 3x3)             & Conv2D (427, 2x2)               \\
+MaxPool (2x2, strides 2)     & MaxPool (3x3, strides 3)       \\
+Dense (4096)                 & Dense (3421)                   \\
+Dropout (0.5)                & Dropout (0.1873)               \\
+Dense (4096)                 & Dense (3421)                   \\
+Dropout (0.5)                & Dropout (0.1873)               \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Os hiper-parâmetros selecionados para a arquitetura otimizada são apresentados na Figura \ref{fig:space_ck+}. O \textit{hyperopt} selecionou \textit{adadelta} como otimizador, opção diferente do \textit{sgd}, que é comumente utilizado para a VGG-16. Também para o CK+ obteve-se menor número de parâmetros processados com a arquitetura otimizada. Isto ocorre também pelo fato de se utilizar menor quantidade de filtros convolucionais ao longo da CNN. Essa diferença é mostrada na Tabela \ref{tab:comparacao-parametros-vgg16-ck+}.
+
+\begin{figure}[H]
+\centering
+\caption{Melhores hiper-parâmetros escolhidos para treinamento do CK+ com a VGG-16.}
+\includegraphics[width=0.6\textwidth]{imagens/space_ck+.png}
+\legend{\small Fonte: Elaborado pelo autor}
+\label{fig:space_ck+}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Comparação entre quantidade de parâmetros calculados para VGG-16 regular e VGG-16 otimizada para treinamentos com o \textit{dataset} CK+.}
+\label{tab:comparacao-parametros-vgg16-ck+}
+\begin{tabular}{@{}cc@{}}
+\toprule
+\textbf{Tipo}         & \textbf{Quantidade de parâmetros} \\ \midrule
+Arquitetura regular   & 56.697.544                         \\
+Arquitetura otimizada & 17.744.257                        \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\section{Resultados obtidos com a base FERPlus} \label{resultados-ferplus}
+
+O último \textit{dataset}, que é o mais extenso dentre os três, resultou em melhores acurácias de treinamento e teste também na arquitetura VGG-16, e por isso, teve seus hiper-parâmetros otimizados para o FERPlus. Na Tabela \ref{tab:resultados-ferplus} são comparados ambos os treinamentos.
+
+Para este \textit{dataset}, o processo de meta-aprendizagem durou em torno de 13 horas, com treinamentos de 100 épocas e 10 avaliações feitas pelo otimizador. Pela sua grande extensão e variedade de imagens, os treinamentos neste \textit{dataset} foram os que apresentaram menores taxas de acurácia. No entanto, os resultados são satisfatórios pois são equiparáveis a resultados de outros trabalhos que serão citados no Capítulo \ref{conclusao}.
+
+\begin{table}[H]
+\centering
+\caption{Resultados obtidos para o treinamento do FERPlus com a VGG-16 regular e VGG-16 com arquitetura otimizada.}
+\label{tab:resultados-ferplus}
+\begin{tabular}{@{}ccc@{}}
+\toprule
+\textbf{Hiper-parâmetros} & \textbf{Acurácia de Treinamento} & \textbf{Acurácia de Teste} \\ \midrule
+Sem otimização            & 98\%              & 78\%               \\
+Com otimização            & 99\%              & 80\%               \\ \bottomrule
+\end{tabular}
+\end{table}
+
+A arquitetura otimizada é apresentada na Tabela \ref{tab:comparacao-vgg16-ferplus}, comparada lado a lado com a arquitetura padrão da VGG-16. O otimizador selecionou \textit{ReLu} como método ativação e optou por não utilizar \textit{data augmentation}. Para este \textit{dataset}, o otimizador selecionado foi o \textit{sgd}, padrão da arquitetura VGG-16, e a porcentagem de \textit{dropout} foi definida em 35\%.
+
+\begin{table}[H]
+\centering
+\caption{Visualização das camadas que compõem a arquitetura regular (esquerda) e arquitetura otimizada (direita) da VGG-16 para o \textit{dataset} FERplus.}
+\label{tab:comparacao-vgg16-ferplus}
+\begin{tabular}{@{}cc@{}}
+\toprule
+\textbf{Arquitetura regular} & \textbf{Arquitetura otimizada} \\ \midrule
+Conv2D(64, 3x3)              & Conv2D (65, 4x4)                \\
+Conv2D (64, 3x3)              & Conv2D (65, 4x4)                \\
+MaxPool (2x2, strides 2)     & MaxPool (4x4, strides 3)       \\
+Conv2D (128, 3x3)             & Conv2D (130, 4x4)               \\
+Conv2D (128, 3x3)             & Conv2D (130, 4x4)               \\
+MaxPool (2x2, strides 2)     & MaxPool (4x4, strides 3)       \\
+Conv2D (256, 3x3)             & Conv2D (261, 4x4)               \\
+Conv2D (256, 3x3)             & Conv2D (261, 4x4)               \\
+Conv2D (256, 3x3)             & Conv2D (261, 4x4)               \\
+MaxPool (2x2, strides 2)     & MaxPool (4x4, strides 3)       \\
+Conv2D (512, 3x3)             & Conv2D (522, 4x4)               \\
+Conv2D (512, 3x3)             & Conv2D (522, 4x4)               \\
+Conv2D (512, 3x3)             & Conv2D (522, 4x4)               \\
+MaxPool (2x2, strides 2)     & MaxPool (4x4, strides 3)       \\
+Conv2D (512, 3x3)             & Conv2D (522, 4x4)               \\
+Conv2D (512, 3x3)             & Conv2D (522, 4x4)               \\
+Conv2D (512, 3x3)             & Conv2D (522, 4x4)               \\
+MaxPool (2x2, strides 2)     & MaxPool (4x4, strides 3)       \\
+Dense (4096)                 & Dense (4176)                   \\
+Dropout (0.5)                & Dropout (0.3500)               \\
+Dense (4096)                 & Dense (4176)                   \\
+Dropout (0.5)                & Dropout (0.3500)               \\ \bottomrule
+\end{tabular}
+\end{table}
+
+O espaço de hiper-parâmetros completo da VGG-16 para o FERPlus pode ser visto na Figura \ref{fig:space_ferplus}. Na Tabela \ref{tab:comparacao-parametros-vgg16-ferplus} é feita a comparação entre o número de parâmetros processados para as arquiteturas regular e otimizada. Importante mencionar que essa foi a única arquitetura otimizada na qual o número de parâmetros cresceu em relação à arquitetura original. Isso ocorreu por conta do aumento (mesmo que pequeno) de filtros das camadas convolucionais. 
+
+\begin{figure}[H]
+\centering
+\caption{Melhores hiper-parâmetros escolhidos para treinamento do FERPlus com a VGG-16.}
+\includegraphics[width=0.6\textwidth]{imagens/space_ferplus.png}
+\legend{\small Fonte: Elaborado pelo autor}
+\label{fig:space_ferplus}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Comparação entre quantidade de parâmetros calculados para VGG-16 regular e VGG-16 otimizada para treinamentos com o \textit{dataset} FERPlus.}
+\label{tab:comparacao-parametros-vgg16-ferplus}
+\begin{tabular}{@{}cc@{}}
+\toprule
+\textbf{Tipo}         & \textbf{Quantidade de parâmetros} \\ \midrule
+Arquitetura regular   & 33.628.872                         \\
+Arquitetura otimizada & 46.840.505                        \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\section{Comparação com trabalhos relacionados} \label{comparacao-trabalhos-relacionados}
+
+Esta Seção é destinada a comparar os resultados obtidos neste trabalho com os resultados de \citeonline{shanli2018}, trabalho que reúne os resultados de diversos autores na resolução do problema de reconhecimento de expressões faciais. Ele abrange diversas bases de treinamento, dentre elas, as três que foram utilizadas na metodologia deste trabalho.
+
+Para um mesmo \textit{dataset} diversas performances foram citadas, cada uma utilizando sua própria técnica de aprendizagem. Para fins de simplificação, apenas a melhor acurácia em cada base será referenciada. Vale mencionar que \citeonline{shanli2018} destacam que o valor de acurácia é na verdade a acurácia média, calculada a partir da matriz de confusão de cada resultado.
+
+Um quadro comparativo pode ser visto na Tabela \ref{tab:comparacao-resultados}. Nota-se que os resultados da metodologia deste trabalho foram satisfatórios, pois como desejado, equiparam-se a resultados de outros trabalhos do mesmo campo de pesquisa. Para referência completa, os resultados resumidos pertencem a: \cite{hamester2015} (JAFFE), \cite{Yu2017DeeperCP} (CK+) e \cite{pramerdorfer2016facial} (FER2013).
+
+\begin{table}[H]
+\centering
+\caption{Comparação entre resultados de trabalhos relacionados e os resultados obtidos neste trabalho.}
+\label{tab:comparacao-resultados}
+\begin{tabular}{@{}ccc@{}}
+\toprule
+\textbf{Dataset} & \textbf{Melhor resultado} & \textbf{Resultado neste trabalho} \\ \midrule
+\textbf{JAFFE}   & 95.8\%                    & 99\%                              \\
+\textbf{CK+}     & 99.6\%                    & 100\%                             \\
+\textbf{FERPlus (FER2013)} & 75.2\% (Teste)            & 80\% (Teste)                      \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\chapter{Conclusão} \label{conclusao}
+
+Este trabalho apresentou sistemas de meta-aprendizagem para a resolução de problemas de reconhecimento de expressões faciais. Buscou-se aprimorar as técnicas já existentes, que na sua grande maioria utilizada Redes Neurais Convolucionais, que foi o subsistema de aprendizagem utilizado na metodologia. O objetivo foi encontrar valores de hiper-parâmetros específicos para arquiteturas já conhecidas, para realização de treinamento em três bases diferentes.
+
+A metodologia aplicada foi bem sucedida, pois obteve resultados semelhantes ao estado-da-arte nas bases selecionadas, comprovando que o bom ajuste das arquiteturas aos dados de entrada favorece o desempenho das CNNs. Convenciona-se entre os pesquisadores a utilização de grandes conjuntos de dados de entrada (grandes bases) em arquiteturas muito profundas ou complexas. Esperava-se neste trabalho que o melhor resultado para a base FERPlus fosse obtido no treinamento com a arquitetura ResNet, o que se provou errado, pois a arquitetura VGG-16 acabou por ser escolhida para ser otimizada neste \textit{dataset}.
+
+A metodologia apresentada neste trabalho pode ser estendida a outros sistemas de Aprendizado de Máquina, favorecendo diferentes problemas existentes por meio de otimizações de arquiteturas de Redes Neurais aplicadas em diferentes esferas. Esperamos que o mesmo abra espaço para trabalhos futuros que envolvam a seleção automática de hiper-parâmetros. O código-fonte do mesmo pode ser encontrado em \citeonline{tccrepositorio}.
+
+\phantompart
+
+\postextual
+
+\bibliography{main}
+
+\end{document}
