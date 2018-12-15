@@ -286,7 +286,7 @@ brazil        % o último idioma é o principal do documento
     \vspace*{\fill}
   \end{center}
         
-  Trabalho \_\_\_\_\_\_\_\_\_\_ em \imprimirlocal, \today:
+  Trabalho aprovado em \imprimirlocal, \today:
   
   \assinatura{\textbf{\imprimirorientador} \\ Orientador} 
   \assinatura{\textbf{Profa. MSca. Vandecia Rejane Monteiro Fernandes} \\ Examinadora}
@@ -894,18 +894,18 @@ No caso da ResNet, como foi possível notar que o JAFFE e o CK+ não foram bem s
 
 \begin{table}[H]
 \centering
-\caption{Resultados dos treinamentos de cada arquitetura em cada \textit{dataset}. (A) corresponde à acurácia de treinamento e (V) corresponde à acurácia de teste.}
+\caption{Resultados dos treinamentos de cada arquitetura em cada \textit{dataset}. (A) corresponde à acurácia de treinamento e (T) corresponde à acurácia de teste.}
 \label{tab:resultados-treinamento}
 \begin{tabular}{@{}cccc@{}}
 \toprule
                     & \textbf{JAFFE}  & \textbf{CK+}    & \textbf{FERPlus} \\ \midrule
-\textbf{SimpleNet}  & A: 99\% V: 87\% & A: 98\% V: 95\% & A: 96\% V: 75\%  \\
-\textbf{VGG-16}     & A: 87\% V: 65\% & A: 99\% V: 95\% & A: 98\% V: 78\%  \\
-\textbf{VGG-19}     & Não realizado   & Não realizado   & A: 98\% V: 77\%  \\
-\textbf{ResNet-18}  & A: 98\% V: 53\% & A: 99\% V: 87\% & A: 96\% V: 72\%  \\
-\textbf{ResNet-34}  & Não realizado   & Não realizado   & A: 96\% V: 75\%  \\
-\textbf{ResNet-50}  & Não realizado   & Não realizado   & A: 90\% V: 66\%  \\
-\textbf{ResNet-152} & Não realizado   & Não realizado   & A: 93\% V: 71\%  \\ \bottomrule
+\textbf{SimpleNet}  & A: 99\% T: 87\% & A: 98\% T: 95\% & A: 96\% T: 75\%  \\
+\textbf{VGG-16}     & A: 87\% T: 65\% & A: 99\% T: 95\% & A: 98\% T: 78\%  \\
+\textbf{VGG-19}     & Não realizado   & Não realizado   & A: 98\% T: 77\%  \\
+\textbf{ResNet-18}  & A: 98\% T: 53\% & A: 99\% T: 87\% & A: 96\% T: 72\%  \\
+\textbf{ResNet-34}  & Não realizado   & Não realizado   & A: 96\% T: 75\%  \\
+\textbf{ResNet-50}  & Não realizado   & Não realizado   & A: 90\% T: 66\%  \\
+\textbf{ResNet-152} & Não realizado   & Não realizado   & A: 93\% T: 71\%  \\ \bottomrule
 \end{tabular}
 \end{table}
 
@@ -960,7 +960,7 @@ Neste espaço de busca, alguns hiper-parâmetros foram definidos com um valor fi
 
 O espaço de busca da VGG-16 visto na Figura \ref{fig:space_vgg_16} apesar de semelhante ao da SimpleNet, apresenta diferenças nos intervalos em alguns hiper-parâmetros: tamanho do \textit{batch} de treino, opção de utilizar ou não aumento de dados, porcentagem de \textit{dropout}, tipo de otimizador, e não há uma opção definida para \textit{batch normalization}, pois a arquitetura não utiliza esta técnica.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
 \caption{Espaço de busca de hiper-parâmetros definido para a VGG-16.}
 \includegraphics[width=1\textwidth]{imagens/space_vgg_16.png}
@@ -1252,7 +1252,7 @@ Um quadro comparativo pode ser visto na Tabela \ref{tab:comparacao-resultados}. 
 
 \chapter{Conclusão} \label{conclusao}
 
-Este trabalho apresentou sistemas de meta-aprendizagem para a resolução de problemas de reconhecimento de expressões faciais. Buscou-se aprimorar as técnicas já existentes, que na sua grande maioria utilizada Redes Neurais Convolucionais, que foi o subsistema de aprendizagem utilizado na metodologia. O objetivo foi encontrar valores de hiper-parâmetros específicos para arquiteturas já conhecidas, para realização de treinamento em três bases diferentes.
+Este trabalho apresentou sistemas de meta-aprendizagem para a resolução de problemas de reconhecimento de expressões faciais. Buscou-se aprimorar as técnicas já existentes, que na sua grande maioria utilizava Redes Neurais Convolucionais, que foi o subsistema de aprendizagem utilizado na metodologia. O objetivo foi encontrar valores de hiper-parâmetros específicos para arquiteturas já conhecidas, para realização de treinamento em três bases diferentes.
 
 A metodologia aplicada foi bem sucedida, pois obteve resultados semelhantes ao estado-da-arte nas bases selecionadas, comprovando que o bom ajuste das arquiteturas aos dados de entrada favorece o desempenho das CNNs. Convenciona-se entre os pesquisadores a utilização de grandes conjuntos de dados de entrada (grandes bases) em arquiteturas muito profundas ou complexas. Esperava-se neste trabalho que o melhor resultado para a base FERPlus fosse obtido no treinamento com a arquitetura ResNet, o que se provou errado, pois a arquitetura VGG-16 acabou por ser escolhida para ser otimizada neste \textit{dataset}.
 
