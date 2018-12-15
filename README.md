@@ -1,9 +1,13 @@
-# Coming soon...
+# Meta-aprendizado aplicado ao Problema de Reconhecimento de Expressões Faciais
 
-Este repositório irá conter futuramente os scripts do meu TCC de Ciência da Computação (UFMA).
-O trabalho é intitulado "Meta-aprendizado aplicado ao problema de reconhecimento de expressões faciais".
+Este repositório contém os scripts para o meu Trabalho de Conclusão de curso de Ciência da Computação (UFMA), que trata da otimização automática dos hiper-parâmetros de arquiteturas de CNNs que serão responsáveis por reconhecer expressões faciais.
+O trabalho foi feito sob a orientação do Prof. Dr. Geraldo Braz Júnior.
 
-Este projeto está atualmente armazenado no gitlab, por motivos de espaço de armazenamento.
-Após a apresentação e correções finais irei colocá-lo aqui.
+## Dependências
+- TensorFlow
+- Keras
+- Hyperopt
+- Quiver (para visualização de filtros no script filters_visualization.py)
 
-Irá incluir diversos scripts úteis para CNNs e datasets.
+## Dúvidas e questões?
+Entre em contato comigo, ficarei feliz em ajudar.
