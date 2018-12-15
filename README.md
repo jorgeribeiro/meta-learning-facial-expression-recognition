@@ -3,6 +3,8 @@
 Este repositório contém os scripts para o meu Trabalho de Conclusão de curso de Ciência da Computação (UFMA), que trata da otimização automática dos hiper-parâmetros de arquiteturas de CNNs que serão responsáveis por reconhecer expressões faciais.
 O trabalho foi feito sob a orientação do Prof. Dr. Geraldo Braz Júnior.
 
+O texto do TCC pode ser encontrado dentro da pasta docs.
+
 ## Dependências
 - TensorFlow
 - Keras
