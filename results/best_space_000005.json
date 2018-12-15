@@ -1,0 +1,14 @@
+{
+    "activation": "relu",
+    "batch_size": 30.0,
+    "conv_filter_size_mult": 1.274183152684306,
+    "conv_kernel_initializer": "glorot_uniform",
+    "conv_kernel_size": 4.0,
+    "conv_padding": "same",
+    "data_aug": false,
+    "dropout": 0.3500133416151149,
+    "optimizer": "sgd",
+    "pool_padding": "same",
+    "pool_size": 4.0,
+    "pool_strides": 3.0
+}

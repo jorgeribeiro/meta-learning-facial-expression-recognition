@@ -1,0 +1,14 @@
+{
+    "activation": "elu",
+    "batch_size": 15.0,
+    "conv_filter_size_mult": 1.0503713838074755,
+    "conv_kernel_initializer": "random_uniform",
+    "conv_kernel_size": 3.0,
+    "conv_padding": "same",
+    "data_aug": true,
+    "dropout": 0.35539713215645213,
+    "optimizer": "sgd",
+    "pool_padding": "same",
+    "pool_size": 4.0,
+    "pool_strides": 4.0
+}
