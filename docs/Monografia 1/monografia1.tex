@@ -1,0 +1,829 @@
+%% abtex2-modelo-relatorio-tecnico.tex, v-1.9.2 laurocesar
+%% Copyright 2012-2014 by abnTeX2 group at http://abntex2.googlecode.com/ 
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% The Current Maintainer of this work is the abnTeX2 team, led
+%% by Lauro César Araujo. Further information are available on 
+%% http://abntex2.googlecode.com/
+%%
+%% This work consists of the files abntex2-modelo-relatorio-tecnico.tex,
+%% abntex2-modelo-include-comandos and abntex2-modelo-references.bib
+%%
+
+\documentclass[
+% -- opções da classe memoir --
+12pt,				% tamanho da fonte
+openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+oneside,			% para impressão em verso e anverso. Oposto a oneside
+a4paper,			% tamanho do papel. 
+% -- opções da classe abntex2 --
+%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+% -- opções do pacote babel --
+english,			% idioma adicional para hifenização
+french,				% idioma adicional para hifenização
+spanish,			% idioma adicional para hifenização
+brazil				% o último idioma é o principal do documento
+]{abntex2}
+
+\sloppy
+\clubpenalty=10000 % Para evitar linhas orfas
+\widowpenalty=10000 % Para evitar linhas viuvas
+\hyphenpenalty=10000 % Para não hifenizar
+
+% ---
+% PACOTES
+% ---
+
+% ---
+% Pacotes fundamentais 
+% ---
+\usepackage{lmodern}			% Usa a fonte Latin Modern
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% para melhorias de justificação
+\usepackage{colortbl}
+\usepackage[font=normalsize,labelfont=bf]{caption} % tamanho de fonte do caption
+\usepackage{subfig}
+% ---
+
+% ---
+% Pacotes adicionais, usados no anexo do modelo de folha de identificação
+% ---
+\usepackage{multicol}
+\usepackage{multirow}
+% ---
+	
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}				% para geração de dummy text
+% ---
+
+% ---
+% Pacotes de citações
+% ---
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+% --- 
+% CONFIGURAÇÕES DE PACOTES
+% --- 
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+% ---
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\titulo{Meta-aprendizado aplicado ao Problema de Reconhecimento de Expressões Faciais}
+\autor{Jorge Luis Melo Ribeiro}
+\orientador{Prof. Dr. Geraldo Braz Jr.}
+\local{São Luís - MA}
+\data{2018}
+\instituicao{
+    Curso de Ciência da Computação 
+    \par 
+    UFMA
+}
+
+\tipotrabalho{Monografia}
+% O preambulo deve conter o tipo do trabalho, o objetivo,   
+% o nome da instituição e a área de concentração 
+\preambulo{Monografia apresentada ao curso de Ciência da Computação da Universidade Federal do Maranhão, como parte dos requisitos necessários para obtenção do grau de Bacharel em Ciência da Computação.}
+% ---
+% O preambulo deve conter o tipo do trabalho, o objetivo, 
+% o nome da instituição e a área de concentração 
+%\preambulo{Modelo canônico de Relatório Técnico e/ou Científico em conformidade
+%com as normas ABNT apresentado à comunidade de usuários \LaTeX.}
+% ---
+
+% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{relatório técnico}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+% --- 
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% ---
+% compila o indice
+% ---
+\makeindex
+
+% ----
+% Início do documento
+% ----
+
+\begin{document}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+\selectlanguage{brazil}
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+% \pretextual
+
+% ---
+% Capa
+% ---
+\renewcommand{\imprimircapa}{%
+\begin{capa}%
+\center
+\includegraphics[scale=0.25]{logoufma.png} \\ 
+\vspace{1cm}
+\ABNTEXchapterfont\Large UNIVERSIDADE FEDERAL DO MARANHÃO \\
+\ABNTEXsectionfont\Large Curso de Ciência da Computação \\
+
+\vspace*{5cm}
+
+\begin{center}
+{\ABNTEXsectionfont\Large\imprimirautor} \\
+\vfill
+\ABNTEXchapterfont\bfseries\LARGE\imprimirtitulo
+\end{center}
+\vfill
+\large\imprimirlocal \\
+\large\imprimirdata
+\vspace*{1cm}
+\end{capa}
+}	
+
+\imprimircapa
+
+
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+\imprimirfolhaderosto
+
+% ---
+
+% ---
+% Anverso da folha de rosto:
+% ---
+
+%TODO: Quando pegar a ficha catalográfica no SIGAA
+%\includepdf{ficha_cat.pdf}
+
+% {
+
+%\ABNTEXchapterfont
+%\vspace*{\fill}
+
+%Conforme a ABNT NBR 10719:2011, seção 4.2.1.1.1, o anverso da folha de rosto
+%deve conter:
+%
+%\begin{alineas}
+%  \item nome do órgão ou entidade responsável que solicitou ou gerou o
+%   relatório; 
+%  \item título do projeto, programa ou plano que o relatório está relacionado;
+% \item título do relatório;
+%  \item subtítulo, se houver, deve ser precedido de dois pontos, evidenciando a
+%   sua subordinação ao título. O relatório em vários volumes deve ter um título
+%   geral. Além deste, cada volume pode ter um título específico; 
+%  \item número do volume, se houver mais de um, deve constar em cada folha de
+%   rosto a especificação do respectivo volume, em algarismo arábico; 
+%  \item código de identificação, se houver, recomenda-se que seja formado
+%   pela sigla da instituição, indicação da categoria do relatório, data,
+%   indicação do assunto e número sequencial do relatório na série; 
+%  \item classificação de segurança. Todos os órgãos, privados ou públicos, que
+%   desenvolvam pesquisa de interesse nacional de conteúdo sigiloso, devem
+%    informar a classificação adequada, conforme a legislação em vigor; 
+% \item nome do autor ou autor-entidade. O título e a qualificação ou a função
+%  do autor podem ser incluídos, pois servem para indicar sua autoridade no
+%   assunto. Caso a instituição que solicitou o relatório seja a mesma que o
+%   gerou, suprime-se o nome da instituição no campo de autoria; 
+%  \item local (cidade) da instituição responsável e/ou solicitante; NOTA: No
+%   caso de cidades homônimas, recomenda-se o acréscimo da sigla da unidade da
+%   federação.
+%  \item ano de publicação, de acordo com o calendário universal (gregoriano),
+%  deve ser apresentado em algarismos arábicos.
+%\end{alineas}
+
+%\vspace*{\fill}
+%}
+% ---
+
+%TODO: Após obter as assinaturas da banca, comente as linhas abaixo ou retire
+%\includepdf{assinaturas.pdf}
+
+
+\begin{folhadeaprovacao}
+
+  \begin{center}
+    {\ABNTEXchapterfont\large\imprimirautor}
+
+    \vspace*{\fill}\vspace*{\fill}
+    \begin{center}
+      \ABNTEXchapterfont\bfseries\Large\imprimirtitulo
+    \end{center}
+    \vspace*{\fill}
+    
+    \hspace{.45\textwidth}
+    \begin{minipage}{.5\textwidth}
+        \imprimirpreambulo
+    \end{minipage}%
+    \vspace*{\fill}
+  \end{center}
+        
+	Trabalho \_\_\_\_\_\_\_\_\_\_ em \imprimirlocal, \today:
+	
+  \assinatura{\textbf{\imprimirorientador} \\ Orientador} 
+  \assinatura{\textbf{Prof. Dr. Primeiro Membro} \\ Examinador}
+  \assinatura{\textbf{Profa. Dra. Segundo Membro} \\ Examinador}
+%   %\assinatura{\textbf{Professor} \\ Convidado 3}
+%   %\assinatura{\textbf{Professor} \\ Convidado 4}
+      
+  \begin{center}
+    \vspace*{0.5cm}
+    {\large\imprimirlocal}
+    \par
+    {\large\imprimirdata}
+    \vspace*{1cm}
+  \end{center}
+  
+\end{folhadeaprovacao}
+
+
+% ---
+% Agradecimentos
+% ---
+\begin{agradecimentos}
+\end{agradecimentos}
+
+
+% Epígrafe
+% ---
+\newpage
+\begin{epigrafe}
+    \vspace*{\fill}
+	\begin{flushright}
+		\textit{"Escolha um trabalho
+		\\que você ame
+		\\e não terás que trabalhar
+		\\um único dia na sua vida."}
+
+Confúcio
+	\end{flushright}
+\end{epigrafe}
+
+
+% ---
+% RESUMO
+% ---
+
+\setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
+\begin{resumo}
+
+De acordo com o professor de psicologia Albert Mehrabian, estudioso da área de comunicação humana, 90\% da expressão humana é não-verbal \cite{mehrabian1971silent}.  O homem, ao se comunicar, expressa de diversas formas aquilo que está sentido, especialmente através de reações. As reações faciais dão contexto e significado à fala humana, sendo os gestos executados de extrema importância para a compreensão do interlocutor. Diante disso, no contexto da evolução de sistemas inteligentes que tratam da interação com humanos, o entendimento correto da emoção sentida pelo homem pode auxiliar na resposta correta ou mais adequada retornada pelo sistema. Em muitos estudos e pesquisas se tem utilizado redes neurais para o treinamento e classificação de aplicações de aprendizado de máquina. Para se construir uma rede neural precisa-se primeiro escolher a sua arquitetura, sendo esta definida a partir de alguns parâmetros específicos, chamados de hiper-parâmetros. As redes neurais convolucionais (CNNs) são utilizadas especificamente para problemas que envolvem imagens como entrada de dados, e também precisam ter seus hiper-parâmetros definidos. A escolha e definição dos valores desses hiper-parâmetros é um problema a ser resolvido nas redes neurais, pois precisa ser feito de forma empírica. Alguns otimizadores já são utilizados para realizar a escolha dos melhores hiper-parâmetros, que fazem essa validação por tentativa e erro dentro de um espaço de busca. Alguns podem ser citados, como é o caso do \textit{Grid Search} e do \textit{Random Search}. Diante do exposto, a proposta deste trabalho é utilizar a biblioteca de otimização \textit{hyperopt} para otimizar os hiper-parâmetros de CNNs que irão realizar o treinamento e classificação de expressões faciais humanas.
+
+\noindent
+\textbf{Palavras-chaves}: redes neurais convolucionais, hiper-parâmetros, meta-aprendizado, \textit{hyperopt}
+
+\end{resumo}
+
+
+% resumo em inglês
+%	\include{estrutura/resumo_en}
+\begin{resumo}[Abstract]
+	\begin{otherlanguage*}{english}
+	According to the psychology professor Albert Mehrabian, scholar in the human communication field, 90\% of the human expression is non-verbal \cite{mehrabian1971silent}. Humans, when communicating, express in several ways what he or she is feeling, specially through reactions. The facial reactions give context and meaning to the human speech, being the executed gestures of extreme importance to the comprehension of the interlocutor. With that said, in the context of evolution of intelligent systems that deal with interaction with humans, the correct comprehension of human's emotion can assist in the correct or more appropriate answer returned by the system. Many studies and researches have used neural networks for training and classification of machine learning applications. To build a neural network it is first necessary to choose its arquitecture, and this is defined with some specific parameters, called hyperparemeters. The convolutional neural networks (CNNs) are utilized specifically to problems that involve images as input, and also need to have their hyperparameters defined. The definition of these hyperparameters' values is a problem to be solved in neural networks, because it has to be done via rules-of-thumb. Some optimizers have being used to pick the best hyperparameters, and do the validation by trial and error within a search space. A few can be cited, such as Grid Search and Random Search. Based on the above, the proposal of this work is to utilize a optimization libray called hyperopt to optimize the hyperparemeters of CNNs that will train and classify human facial expressions.
+	
+	
+	\textbf{Keywords}: convolutional neural networks, hyperparameters, meta learning, hyperopt
+	\end{otherlanguage*}
+\end{resumo}
+
+% ---
+\cleardoublepage
+
+% ---
+% inserir lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+% ---
+
+
+% ---
+% inserir lista de tabelas
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+
+
+% ---
+% inserir lista de abreviaturas e siglas
+% ---
+\begin{siglas}
+\item[CC] \textit{Ciência da Computação}
+\item[UFMA] \textit{Universidade Federal do Maranhão}
+\end{siglas}
+
+% ---
+
+% ---
+% inserir lista de símbolos
+% ---
+%\begin{simbolos}
+%  \item[$ \in $] Pertence
+%\end{simbolos}
+% ---
+
+% ---
+% inserir o sumario
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+% ---
+
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS                                        
+% ----------------------------------------------------------
+\textual
+
+%\addcontentsline{toc}{chapter}{Resumo}
+
+% --------------------------------------------------
+% Introdução 
+% --------------------------------------------------
+
+\chapter{Introdução} \label{introducao}
+Um dos campos de pesquisa de inteligência artificial diz respeito ao aperfeiçoamento da interação das máquinas com o homem. Antes do surgimento e popularização dos Sistemas Inteligentes, era mais comum que o usuário se adaptasse ao sistema que fizesse uso, aprendendo seu funcionamento e a forma  correta de utilização. Com os avanços obtidos nos estudos realizados em aprendizado de máquina, o papel de adaptação se inverteu. Os sistemas desenvolvidos para interagir com o homem buscam entender as necessidades do usuário e aprendem a partir do modo como são utilizados. 
+
+Nesse contexto, uma das formas que auxiliam no aprendizado de máquina é analisar e compreender o sentimento do homem. Para as empresas, por exemplo, é importante saber o que seus clientes pensam sobre seus serviços oferecidos \cite{pang2008opinion}, e por esse motivo investem em pesquisas de análise de sentimento a partir de textos extraídos principalmente da internet que dão opiniões sobre seus produtos ou serviços.
+
+Em um campo mais amplo, o reconhecimento automático de emoções em humanos tornou-se objeto de estudo de grande interesse nas últimas décadas. Tendo aplicações que vão desde a melhora da qualidade de trabalho de funcionários até o aprimoramento da experiência de usuário em websites \cite{kolakowska2014emotion}. A compreensão da emoção sentida pelo homem nas mais diversas situações é um grande passo para o aprimoramento de Sistemas Inteligentes construídos para este fim.
+
+Nessa linha, \citeonline{miskam2014humanoid} apresentou um estudo que utiliza um robô humanoide para interagir com crianças portadoras do Transtorno de Asperger, popularmente conhecido como autismo. O robô é capaz de reconhecer emoções e interagir com as crianças, que costumam apresentar dificuldades em comunicação, comportamento e interação social. O objetivo do estudo é proporcionar melhoras no desenvolvimento social e na resposta aos sentimentos de outras pessoas, tarefas as quais crianças autistas apresentam dificuldades em realizar.
+
+De forma específica dentro do estudo de reconhecimento de emoções, surgiu grande interesse no reconhecimento de expressões faciais de forma a aprimorar a interação humano-computador. Na última década, diversos trabalhos foram feitos nesse campo, como por exemplo \cite{sarode2010facial}, \cite{manglik2004facial} e \cite{bartlett2003real}. Nos três estudos é citada a dificuldade de se obter bons resultados, devido aos desafios que existem na tarefa de classificar emoções humanas. Alguns desses desafios são: a carência de \textit{datasets} extensos; a ambiguidade que uma expressão facial pode apresentar; a dificuldade dos computadores reconhecerem emoções faciais em situações naturais.
+    
+Além dos trabalhos citados no parágrafo anterior, outros autores buscaram diferentes métodos para resolver o problema do reconhecimento de expressões faciais. Antes da popularização das redes neurais profundas,  foram propostas diferentes técnicas para realizar a classificação das emoções. O trabalho de \cite{shan2009facial} baseia-se na análise das expressões através de características \textit{Local Binary Pattern (LBP)}, e o aprendizado das emoções por meio de diferentes métodos como \textit{Template Matching}, \textit{Support Vector Machine (SVN)} e \textit{Linear Discriminant Analysis (LDA)}. Nesse trabalho os autores utilizaram o \textit{dataset} \textit{Cohn-Kanade} \cite{kanade2000comprehensive} gerado em laboratório sob condições controladas, obtendo acurácia acima de 90\% em algumas das classes.
+
+Uma outra técnica foi proposta por \cite{dhavalikar2014face} e consistia em três fases: detecção de face, extração de características e reconhecimento da expressão. A extração de características segmentava os principais elementos do rosto humano como olhos, nariz e boca, utilizando o método \textit{Active Appearance Model (AAM)}. Com os elementos segmentados, a expressão era reconhecida calculando-se a distância euclidiana entre os pontos dos segmentos, sendo esse valor comparado com a distância euclidiana de imagens de treinamento. A emoção que apresentasse menor diferença na comparação é então escolhida.
+
+Trabalhos mais recentes \cite{levi2015emotion}, \cite{mollahosseini2016going} e \cite{pramerdorfer2016facial} fizeram uso das redes neurais convolucionais (\textit{Convolutional Neural Networks} - CNN), uma classe de redes neurais que recebem imagens como entrada de dados, portanto úteis e adequadas para o problema de reconhecimento de expressões em imagens de faces. Esse método de \textit{Deep Learning} tem demonstrado grande capacidade de classificação em problemas de aprendizado de máquina. Essa demonstração pode ser verificada nos últimos resultados do \textit{ImageNet Challenge}, desafio que ocorre todos os anos e disponibiliza um dos maiores \textit{datasets} de imagens anotadas, que possui mais de 14 milhões de imagens \cite{deng2014scalable}. Nas últimas edições as redes neurais convolucionais estão alcançando resultados cada vez melhores, com a construção de variadas arquiteturas de CNNs em cada edição.
+
+Para se construir uma CNN, alguns aspectos importantes precisam ser levados em conta: dados que serão utilizados como entrada, tamanho do \textit{dataset}, quantidade de camadas, tamanho dos filtros das camadas convolucionais, porcentagem de \textit{dropout}, entre outros. Logo, para cada problema, a escolha desses parâmetros deve ser bem definida para que se consiga obter um bom resultado. No contexto das CNNs, existem alguns parâmetros de suma importância, além dos já citados anteriormente, que são definidos antes do treinamento da rede. Tais parâmetros estão estritamente ligados à arquitetura da CNN, e por isso são chamados de hiper-parâmetros. Após o grande crescimento das arquiteturas das CNNs em relação ao número de camadas, existe também a preocupação de se escolher os hiper-parâmetros de forma eficaz. Isso pode ser feito por algumas técnicas já conhecidas, como o \textit{Grid Search} e o \textit{Random Search} \cite{bergstra2011algorithms}. O \textit{Grid Search} é uma técnica de força-bruta, logo demanda muito tempo para ser executada. O \textit{Random Search} é semelhante ao \textit{Grid Search}, porém executa de forma estocástica e tem como proposta retornar os melhores hiper-parâmetros em menos tempo quando comparado ao \textit{Grid Search}.
+
+Estudos recentes de \cite{pinto2009high} e \cite{coates2011importance} demonstram que o desafio de otimizar os hiper-parâmetros em modelos profundos têm impedido o progresso científico. Por isso, seria adequado utilizar uma técnica em torno do processo de aprendizagem, de forma a realizar a escolha em um espaço de busca definido, que contenha intervalos específicos para cada hiper-parâmetro. Nesse contexto, uma biblioteca chamada de \textit{hyperopt} \cite{bergstra2013hyperopt} tem se popularizado. Nela, um espaço de busca é construído de forma estruturada e dois algoritmos de busca são fornecidos: \textit{Random Search} e \textit{Tree-of-Parzen-Estimators (TPE)} \cite{bergstra2011algorithms}.
+
+Diante da problemática do reconhecimento automático de expressões faciais, somada à dificuldade de escolha dos hiper-parâmetros das Redes Neurais Convolucionais, este trabalho propõe realizar a otimização dos hiper-parâmetros para arquiteturas de CNNs, as quais serão utilizadas para o treinamento e classificação de expressões faciais em imagens de rostos. Tanto o algoritmo de otimização quanto as arquiteturas escolhidas são discutidas no Capítulo \ref{fundamentacao}.
+
+\section{Objetivo} \label{objetivo}
+
+Com base no que foi introduzido, o principal objetivo deste trabalho é estimar os melhores hiper-parâmetros para arquiteturas de Redes Neurais Convolucionais, de forma a encontrar bons resultados no problema de reconhecimento de expressões faciais utilizando três \textit{datasets}: \textit{JAFFE} \cite{lyons1998coding}, \textit{CK+} \cite{lucey2010extended} e \textit{FERPlus} \cite{Barsoum:2016:TDN:2993148.2993165}.
+
+\subsection{Objetivos Específicos} \label{objetivosespecificos}
+
+Especificamente este trabalho tem como objetivos:
+
+\begin{itemize}
+    \item Utilização da biblioteca de otimização \textit{hyperopt} para realizar a busca dos melhores hiper-parâmetros para as arquiteturas de CNN escolhidas;
+    \item Treinamento e classificação de emoções faciais por CNNs em sete classes: alegria, tristeza, nojo, medo, neutro, raiva e surpresa (no caso dos \textit{datasets} \textit{CK+} e \textit{FERPlus} há uma oitava classe: desprezo);
+    \item Verificação dos hiper-parâmetros que mais influenciam no treinamento das CNNs;
+    \item Observar o desempenho de diferentes arquiteturas de CNN no problema de reconhecimento de expressões faciais;
+    \item Utilização de três diferentes \textit{datasets} de forma a validar a metodologia;
+    \item Buscar resultados semelhantes ou melhores ao estado-da-arte para trabalhos que utilizem os mesmos \textit{datasets}.
+\end{itemize}
+
+\section{Contribuição} \label{contribuicao}
+
+As principais contribuições deste trabalho são:
+
+\begin{itemize}
+    \item Verificação comparativa do desempenho de diferentes arquiteturas de Redes Neurais Convolucionais e seus hiper-parâmetros;
+    \item Uso de Redes Neurais Convolucionais no reconhecimento de expressões faciais;
+    \item Método de meta-aprendizado em \textit{Deep Learning} pela seleção automática dos hiper-parâmetros das CNNs, para o problema de reconhecimento de expressões faciais.
+\end{itemize}
+
+% ---------------------------------------------------
+% Fim da Introdução                                  
+% ---------------------------------------------------
+
+\include{abntex2-modelo-include-comandos} 
+
+% ---------------------------------------------------
+% Fundamentação Teórica
+% ---------------------------------------------------
+\chapter{Fundamentação Teórica} \label{fundamentacao}
+
+Neste capítulo são discutidos os principais conceitos utilizados na realização deste trabalho. Todos estão relacionados com \textit{Deep Learning}, como: Redes Neurais Convolucionais, Aprendizado de Máquina e hiper-parâmetros que compõem arquiteturas de Redes Neurais. Também será abordado o conceito de Meta-aprendizagem por meio da otimização automática dos hiper-parâmetros de CNNs. Dentro do conceito de Meta-aprendizagem, será feita uma explicação da biblioteca \textit{hyperopt} e de seus algoritmos de otimização.
+
+\section{Deep Learning} \label{deeplearning}
+
+\textit{Deep Learning} ou Aprendizado Profundo é um subcampo de Aprendizado de Máquina que consiste em algoritmos chamados de Redes Neurais Artificiais, pois são inspirados na estrutura e funcionamento do cérebro. O termo \textit{Deep} diz respeito à estrutura da Rede Neural Artificial (RNA), que é construída em camadas. Normalmente essas camadas são separadas entre camada de entrada, camada de saída e camada(s) escondida(s) (que ficam entre a entrada e a saída). Quanto mais camadas uma RNA possuir, mais profunda ela é. Essa estrutura pode ser visualizada na representação da Figura \ref{fig:neural_network}. Cada círculo representa um neurônio, e um conjunto de neurônios compõe uma camada.
+
+\begin{figure}[ht]
+\centering
+\caption{Representação da estrutura de um Neurônio (esquerda) e uma Rede Neural Artificial (direita).}
+\includegraphics[width=0.8\textwidth]{imagens/neural_network.png}
+\legend{\small Fonte: Adaptado de \cite{rna}}
+\label{fig:neural_network}
+\end{figure}
+
+O uso de RNAs para realizar tarefas de Aprendizado de Máquina se popularizou com o crescimento expressivo de dados disponíveis. Os modelos anteriores às RNAs lidavam com conjuntos pequenos de dados, logo, com o crescimento ocorrido nas últimas décadas, novos modelos eram necessários para processar o grande volume de dados existente. Outro fator que contribuiu para o crescimento de uso das RNAs foi o aumento do poder computacional, principalmente pelo uso de placas gráficas (\textit{GPUs}) para realizar o processamento dos dados de entrada. Essa mudança de paradigma é descrita no gráfico da Figura \ref{fig:why_deep_learning}.
+
+\begin{figure}[ht]
+\centering
+\caption{Gráfico comparativo de Deep Learning versus métodos anteriores de aprendizado.}
+\includegraphics[width=0.6\textwidth]{imagens/why_deep_learning.png}
+\legend{\small Fonte: \cite{whydeeplearning}}
+\label{fig:why_deep_learning}
+\end{figure}
+
+Outro grande benefício das RNAs é a sua habilidade de realizar a extração automática de características dos dados (\textit{Feature Learning}) \cite{bengio2012deep}. Em um outro trabalho de \citeonline{bengio2009learning}, a extração de características é explicada: métodos de \textit{Deep Learning} aprendem as características de forma hierárquica; as características são extraídas dos níveis mais altos até os níveis mais baixos. Dessa forma, as RNAs aprendem tais características em diferentes níveis de abstração, permitindo ao sistema aprender funções complexas sem depender de características extraídas de forma manual. 
+
+Os bons resultados alcançados pelas RNAs às popularizaram como um dos melhores métodos de Aprendizado de Máquina. Diversos problemas anteriores de Inteligência Artificial que persistiam ser insolucionáveis têm apresentado bons avanços quando aplicados em \textit{Deep Learning}. De forma especial, as RNAs produzem resultados promissores em tarefas de processamento de linguagem natural, e por este motivo, foram escolhidas para resolver o problema de classificação de emoções neste trabalho.
+
+\subsection{\textit{Feedforward} e \textit{Backpropagation}} \label{feed_back}
+
+Para melhor compreensão de como as Redes Neurais Profundas (RNP) realizam o Aprendizado de Máquina, é necessário primeiramente que dois conceitos sejam explicados: o \textit{Feedforward} e o \textit{Backpropagation}. Alguns autores chamam as RNPs de \textit{Feedforward Neural Networks}, porque os dados seguem na mesma direção por todas as camadas da rede, nas quais diversas computações são feitas sobre esses dados até chegar na última camada retornando uma saída. A Figura \ref{fig:feed_forward} exemplifica o fluxo de dados em uma RNP.
+
+\begin{figure}[ht]
+\centering
+\caption{Dados fluem em uma RNP da entrada [x1, x2, x3] para a saída [y1, y2], passando pelos neurônios [s1, s2, s3, s4, s5] das camadas centrais.}
+\includegraphics[width=0.6\textwidth]{imagens/feed_forward.png}
+\legend{\small Fonte: \cite{informationflow}}
+\label{fig:feed_forward}
+\end{figure}
+
+Cada ligação entre neurônios possui um peso associado. Cada neurônio recebe a informação dos neurônios que possua ligação na camada anterior, e processa esses dados junto ao peso da ligação. O resultado do cálculo obtido por esse neurônio é redirecionado aos neurônios que possui ligação na camada seguinte. Esse procedimento é feito por cada neurônio a partir da primeira camada escondida até a camada de saída, na qual o resultado é comparado à saída esperada por meio do cálculo do erro. O objetivo de uma RNP é diminuir esse erro, de forma a obter na saída o resultado mais próximo da classificação desejada. Esse procedimento é chamado de \textit{Feedforward}.
+
+Um erro associado é calculado para cada iteração de uma RNP. Esse erro é transferido de volta ao início da rede, para que os pesos de cada neurônio sejam corrigidos de acordo com a taxa de erro do neurônio relacionado, sendo a taxa calculada a partir da saída esperada. Esse processo de retorno do erro para correção dos pesos é chamado de \textit{Backpropagation}. O \textit{Feedforward} é o processo de transferência dos dados à frente, enquanto o \textit{Backpropagation} faz o caminho inverso, realizando a correção dos pesos.
+
+Os dados de entrada são processados pela RNP por um número finito de vezes (quantidade de épocas), até se alcançar uma acurácia desejada ou a taxa de erro ser igual ou menor a uma taxa mínima definida.
+
+\subsection{CNN} \label{cnn}
+
+Redes Neurais Convolucionais (CNN do inglês \textit{Convolutional Neural Networks}) \cite{lecun1989cnn} são um tipo especializado de Rede Neural projetadas para processar dados que estão na forma de múltiplos \textit{arrays}. Alguns exemplos desses dados são: sinais e sequências (uma dimensão), imagem ou áudio (duas dimensões), vídeos ou imagens volumétricas (três dimensões). A imagem é o tipo de dado mais comum utilizado como entrada em uma CNN. 
+
+O termo ``Rede Neural Convolucional'' indica que a rede faz uso de uma operação matemática chamada convolução. A convolução é um tipo específico de operação linear, utilizada no lugar das multiplicações de matrizes que são realizadas em uma Rede Neural comum.
+
+A arquitetura de uma CNN é estruturada como uma série de estágios, assim como a distribuição em camadas de uma RNP. Os primeiros estágios geralmente são compostos de dois tipos de camadas: camadas convolucionais e camadas \textit{pooling}. O objetivo da camada convolucional é detectar conjuntos de características dos dados recebidos da camada imediatamente anterior a ela, enquanto que a camada \textit{pooling} une as características detectadas que são semanticamente similares, realizando uma sub-amostragem dessas características. A seguir, veremos como as operações de convolução e \textit{pooling} são feitas em imagens.
+
+\subsubsection{Convolução} \label{convolucao}
+
+Como explicado na Subseção \ref{feed_back}, uma Rede Neural aprende características de cada classe a partir da correção dos pesos associados às ligações entre neurônios. No caso das CNNs, os pesos da rede estão associados nas camadas convolucionais por meio de conjuntos de filtros. Cada filtro é passado sobre a imagem recebida da camada anterior, resultando em um mapa de ativação de características daquele filtro. Intuitivamente, a rede irá aprender filtros que são ativados quando percebem algum tipo de característica visual na imagem como bordas, cores e padrões. Na Figura \ref{fig:conv_filter} é possível visualizar uma imagem de entrada e um filtro de ativação em forma de ``X'' da camada convolucional.
+
+\begin{figure}[ht]
+\centering
+\caption{Esquerda: imagem de entrada em uma CNN. Direita: exemplo de filtro de ativação.}
+\includegraphics[width=0.5\textwidth]{imagens/conv_filter.png}
+\legend{\small Fonte: Adaptado de \cite{conv_filter}}
+\label{fig:conv_filter}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\caption{Processo de convolução realizado pelo filtro (azul) sobre a imagem, resultando no mapa de características (laranja).}
+\includegraphics[width=0.6\textwidth]{imagens/convolution.png}
+\legend{\small Fonte: Adaptado de \cite{conv_filter}}
+\label{fig:convolution}
+\end{figure}
+
+Como notado na Figura \ref{fig:convolution}, a convolução é o resultado de uma soma ponderada local entre o filtro e a imagem, após esta ter sido percorrida totalmente pelo filtro. Definindo o tamanho do filtro (\textit{kernel}) menor que o tamanho da imagem permite que haja economia computacional, dado que apenas computações locais limitadas à área do filtro são feitas.
+
+Outra propriedade que garante a viabilidade do processamento de imagens nas CNNs é o compartilhamento de parâmetros. Em uma Rede Neural tradicional, cada elemento da matriz de pesos é usado exatamente uma vez quando se computa a saída de uma camada. No caso das CNNs os pesos são considerados interligados, pois o valor de um peso aplicado a uma entrada é ligado ao valor de outro peso aplicado em outro local da rede.
+
+\begin{figure}[ht]
+\centering
+\caption{Visualização do compartilhamento de parâmetros de uma CNN.}
+\includegraphics[width=0.5\textwidth]{imagens/parameter_sharing.png}
+\legend{\small Fonte: \cite{Goodfellow-et-al-2016}}
+\label{fig:paramater_sharing}
+\end{figure}
+
+Vê-se na Figura \ref{fig:paramater_sharing} uma descrição visual do funcionamento do compartilhamento de parâmetros. As setas pretas em destaque indicam conexões que utilizam um parâmetro em particular em dois diferentes modelos. Na imagem do topo, as setas pretas indicam o uso do elemento central de um \textit{kernel} de três elementos em um modelo convolucional. Observa-se que ele é utilizado repetidas vezes para diferentes entradas. Na imagem inferior, a seta preta indica o uso do elemento central de uma matriz de pesos em um modelo totalmente conectado. Esse último modelo não possui compartilhamento de parâmetros, por isso, o parâmetro é utilizado apenas uma única vez.
+
+\subsubsection{\textit{Pooling}} \label{pooling}
+
+Uma CNN é tipicamente composta de três estágios (Figura \ref{fig:conv_stages}). No primeiro estágio diversas convoluções são realizadas para produzir um conjunto de ativações lineares. Em seguida, cada ativação linear é passada por uma função de ativação não-linear, como por exemplo a ativação \textit{Rectifed Linear Unit (ReLU)}. Por último, a rede faz uso de uma função \textit{pooling} para modificar a saída da camada.
+
+\begin{figure}[ht]
+\centering
+\caption{Estágios de uma CNN típica.}
+\includegraphics[width=0.3\textwidth]{imagens/conv_stages.png}
+\legend{\small Fonte: Adaptado de \cite{Goodfellow-et-al-2016}}
+\label{fig:conv_stages}
+\end{figure}
+
+Uma função \textit{pooling} substitui a saída da rede em certo local por uma representação estatística. Por exemplo, a operação \textit{max pooling} \cite{Zhou-et-al-1988} retorna uma saída máxima em uma vizinhança retangular. Outra operação \textit{pooling} conhecida é \textit{average pooling} que retorna a média de uma vizinhança retangular.
+
+A operação \textit{max pooling} é a mais comum de ser utilizada em arquiteturas de CNN, e pode ser vista na Figura \ref{fig:pool_operation}. É possível notar em ambas as Figuras \ref{fig:pool_f1} e \ref{fig:pool_f2} que ao final, uma sub-amostragem da imagem dada como entrada é retornada pela operação \textit{pooling}. É importante mencionar que a quantidade de dados devolvida após a operação é significantemente reduzida sem grandes perdas, tornando viável a utilização dessa operação para realização de sub-amostragem dos mapas de ativação.
+
+\begin{figure}[ht]
+\centering
+\caption{Demonstração da operação \textit{max pooling}.}
+\subfloat[]{\includegraphics[width=0.35\textwidth]{imagens/pool.jpeg}\label{fig:pool_f1}}
+\hfill
+\subfloat[]{\includegraphics[width=0.6\textwidth]{imagens/maxpool.jpeg}\label{fig:pool_f2}}
+\legend{\small Fonte: \cite{pool_operation}}
+\label{fig:pool_operation}
+\end{figure}
+
+\subsection{Hiper-parâmetros} \label{hiperparametros}
+
+Modelos de Redes Neurais, tanto comuns quanto convolucionais, são parametrizados por um conjunto de hiper-parâmetros que precisam ser escolhidos apropriadamente de forma a maximizar o processo de aprendizagem. Os hiper-parâmetros são utilizados para configurar diversos aspectos do algoritmo de aprendizagem e podem ter efeitos variados no modelo resultante e na sua performance \cite{ClaesenM15}.
+
+Para que fique mais claro, é válido primeiramente diferenciar o que são parâmetros e hiper-parâmetros de um modelo. Parâmetros são valores que precisam ser estimados dos dados utilizados como entrada. Tais valores não costumam ser definidos manualmente e podem ser salvos ao final do processo de aprendizagem. Os pesos aprendidos por uma rede neural ao final de um treinamento, por exemplo, são definidos como parâmetros de um modelo.
+
+Já os hiper-parâmetros são valores externos ao modelo que não podem ser estimados a partir dos dados de entrada. Eles influenciam diretamente nos processos que realizam a estimativa dos parâmetros de um modelo, e são definidos manualmente por quem realiza a modelagem, a partir de conhecimento empírico ou pela realização de testes em conjuntos de hiper-parâmetros.
+
+Alguns exemplos de hiper-parâmetros de redes neurais já foram mencionados na seção \ref{introducao}, e para a modelagem de arquiteturas vários outros precisam ser levados em conta. Os hiper-parâmetros mais comuns para Redes Neurais Convolucionais (objeto desse trabalho) são:
+
+\begin{itemize}
+    \item Quantidade de filtros convolucionais
+    \item Tamanho dos filtros convolucionais
+    \item Tipo de ativação (\textit{relu}, \textit{elu}, \textit{tanh}, \textit{sigmoid})
+    \item Tamanho do \textit{pooling}
+    \item Salto do \textit{Stride} (passo)
+    \item Porcentagem de \textit{dropout}
+    \item Uso de \textit{Batch Normalization}
+    \item Tamanho do \textit{batch} de treinamento
+\end{itemize}
+
+Os hiper-parâmetros listados serão explicados na seção \ref{metodologia}, assim como quais intervalos de valores são mais apropriados para serem utilizados em cada um deles.
+
+\section{Meta-aprendizagem} \label{metaaprendizagem}
+
+O paradigma tradicional em aprendizado de máquina é adquirir um grande \textit{dataset} e treinar um novo modelo utilizando esse \textit{dataset}. A decisão de escolha do \textit{dataset}, modelo a ser utilizado e seus hiper-parâmetros está totalmente relacionada a quem realiza a modelagem, a partir de suas experiências e aprendizado anteriores. Meta-aprendizado (do inglês \textit{meta-learning}) é um tópico recente de pesquisa direcionado ao problema de ``aprender a aprender''. Seu objetivo é aperfeiçoar a performance de algoritmos de aprendizagem existentes por meio da auto-decisão de variáveis que compõem o problema.
+
+O conceito chave de sistemas de aprendizagem é o aperfeiçoamento por experiência. Como explicado por \citeonline{vanschoren2010understanding}, o ``meta-aprendizado monitora o processo de aprendizagem automático, no contexto dos problemas de aprendizado que ele encontra, e tenta adaptar seu comportamento para se aperfeiçoar.''
+
+O trabalho de \citeonline{Lemke2015} enumera dois requisitos que definem um sistema de meta-aprendizagem:
+
+\begin{itemize}
+    \item Um sistema de meta-aprendizagem precisa incluir um subsistema de aprendizagem.
+    \item A experiência é obtida pela exploração da meta-informação extraída:
+    \begin{itemize}
+        \item em um episódio anterior de aprendizagem em um único dataset e/ou
+        \item de diferentes domínios ou problemas.
+    \end{itemize}
+\end{itemize}
+
+Meta-aprendizagem pode ser empregada em uma variedade de configurações, com certa discordância na literatura sobre quais configurações constituem ou não problemas de meta-aprendizado. Este trabalho, no entanto, seguirá  os requisitos citados anteriormente, e que estão agrupados no diagrama da Figura \ref{fig:meta_learning_system}. Cada um dos três círculos relaciona-se aos pontos dos requisitos (obtenção de experiência, meta-aprendizado com um único \textit{dataset}, meta-aprendizado em diferentes domínios).
+
+\begin{figure}[ht]
+\centering
+\caption{Componentes de um sistema de meta-aprendizado.}
+\includegraphics[width=0.6\textwidth]{imagens/meta_learning_system.png}
+\legend{\small Fonte: \cite{Lemke2015}}
+\label{fig:meta_learning_system}
+\end{figure}
+
+Para este trabalho, o sistema de meta-aprendizagem se dará pela estimação automática de valores para hiper-parâmetros de Redes Neurais Convolucionais, sendo as CNNs o subsistema de aprendizagem a ser utilizado. A experiência será obtida pela realização de diversos treinamentos de CNN, onde variados valores de hiper-parâmetros serão testados buscando o melhor resultado (menor perda e maior acurácia) para os datasets escolhidos. Esse sistema fará uso da biblioteca de otimização automática \textit{Hyperopt}, objeto da subseção a seguir.
+
+\subsection{\textit{Hyperopt}} \label{hyperopt}
+
+Avanços recentes no estado da arte de resultados em classificação de imagens têm sido obtidos pelo aperfeiçoamento de configurações de técnicas existentes, no lugar da criação de novas abordagens que realizem o aprendizado de características \cite{bergstra2011algorithms}. Tradicionalmente, a busca dos hiper-parâmetros que compõem um modelo é feita manualmente, por meio de visualizações anteriores \cite{Hinton2012}, \cite{Hsu2003APG} ou pelo teste de conjuntos de hiper-parâmetros em uma grade de opções predefinidas \cite{Pedregosa2011}. 
+
+Tais abordagens, no entanto, deixam a desejar em termos de reprodução e são impraticáveis quando o número de hiper-parâmetros é extenso \cite{ClaesenM15}. Devido tais falhas, a ideia de automatizar a busca de hiper-parâmetros tem recebido grande atenção em aprendizado de máquina recentemente. Processos automatizados de busca já têm demonstrado melhor capacidade quando comparados à busca manual em diversos problemas \cite{Bergstra2011}, \cite{Bergstra2012}.
+
+No contexto desse problema surge uma biblioteca chamada \textit{Hyperopt} \cite{bergstra2013hyperopt} com o objetivo de realizar a busca otimizada de hiper-parâmetros sobre espaços de busca predefinidos, que podem incluir valores de dimensão real, discreta ou condicional. A biblioteca utiliza a otimização \textit{Sequential model-based (SMBO)}, também conhecida como otimização Bayesiana \cite{Pelikan1999}, que é, segundo os criadores do \textit{Hyperopt}, um dos métodos mais eficientes de otimização existente.
+
+O ponto chave que diferencia a busca realizada pelo \textit{SMBO} do \textit{Grid Search} e do \textit{Random Search} é que estes últimos desconsideram qualquer busca feita anteriormente pelo fato de não serem otimizados. Métodos \textit{SMBO} funcionam a partir da busca do próximo conjunto de hiper-parâmetros a ser avaliado na função objetivo pela seleção dos hiper-parâmetros que sobressaíram em uma função probabilística substituta (chamada de função \textit{surrogate}), que é menos custosa de ser avaliada. Caso os hiper-parâmetros avaliados apresentem bons resultados também na função objetivo, eles são incorporados ao conjunto de melhores hiper-parâmetros.
+
+Existem cinco aspectos que fazem parte de um método de otimização \textit{SMBO} (alguns já citados no parágrafo anterior):
+
+\begin{itemize}
+    \item Um domínio de hiper-parâmetros no qual a busca é realizada
+    \item Uma função objetivo que utiliza os valores dos hiper-parâmetros e retorna uma saída que pode ser maximizada ou minimizada
+    \item Uma função \textit{surrogate} (substituta) da função objetivo
+    \item Um critério de avaliação de quais hiper-parâmetros devem ser escolhidos em seguida a partir da função \textit{surrogate}
+    \item Um histórico que consiste em um par \{score, hiper-parâmetros\} utilizado pelo algoritmo para atualizar a função \textit{surrogate}
+\end{itemize}
+
+Em seu artigo, \citeonline{bergstra2013hyperopt} explicam que métodos \textit{SMBO} são aplicados em cenários nos quais o usuário deseja minimizar o valor de uma função que possui avaliação custosa, seja em termos de tempo ou custo. Algumas vantagens do \textit{SMBO} são enumeradas:
+
+\begin{itemize}
+    \item Lida com variáveis reais, discretas ou condicionais
+    \item Capaz de realizar avaliações paralelas de uma função
+    \item Lida com centenas de variáveis, mesmo que precise realizar também centenas de avaliações de funções
+\end{itemize}
+
+A biblioteca \textit{Hyperopt} fornece dois algoritmos de busca de hiper-parâmetros: \textit{Random Search} \cite{Bergstra2012} e \textit{Tree-structured Parzen Estimator (TPE)} \cite{bergstra2011algorithms}, que será explicado na Subseção \ref{tpe} pois foi o algoritmo escolhido para realizar as buscas dos melhores espaços de hiper-parâmetros neste trabalho. 
+
+A biblioteca é, em geral, indicada para resolver qualquer problema \textit{SMBO}, no entanto, seus autores afirmam que a desenvolveram com o intuito de otimizar os hiper-parâmetros de Redes Neurais Profundas e Redes Neurais Convolucionais. A sua utilização se dá por: a) definição de uma função objetivo a ser minimizada, b) definição de um espaço de busca de hiper-parâmetros, c) decisão do algoritmo de busca (\textit{random} ou \textit{tpe}). Com esses três pontos definidos, basta realizar a chamada do método \textit{fmin} para iniciar a busca. A biblioteca ainda é capaz de executar paralelamente em \textit{cluster} para realizar buscas mais rápidas, por meio de um banco de dados \textit{MongoDB}.
+
+Além do \textit{Hyperopt}, existem outras bibliotecas que realizam tarefas de meta-aprendizado em Redes Neurais como é o caso de \cite{NNI}, que além de realizar buscas otimizadas em espaços de hiper-parâmetros, também faz a busca de melhores arquiteturas de Redes Neurais para determinados problemas. Tarefa semelhante é realizada por \citeonline{liu2018darts}, que trabalha na modelagem de arquiteturas especificamente para CNNs.
+
+\subsubsection{\textit{Tree-structured Parzen Estimator}} \label{tpe}
+
+\textit{Tree-structured Parzen Estimator} (\textit{TPE}) \cite{bergstra2011algorithms} é um método \textit{SMBO} que em suas iterações realiza a coleta de novas observações, e ao fim da iteração decide de forma otimizada qual conjunto de parâmetros ele deve testar na sequência. Sendo um método \textit{SMBO}, ele segue os cinco aspectos citados na Subseção \ref{hyperopt}, empregando uma função \textit{surrogate} própria e tendo como critério de avaliação o Aperfeiçoamento Esperado (do inglês \textit{Expected Improvement - EI}).
+
+Para iniciá-lo, é necessário primeiramente definir uma distribuição inicial de hiper-parâmetros. Esse conjunto normalmente é uma distribuição uniforme, porém também é possível associar qualquer hiper-parâmetro com uma distribuição estocástica. Em suas primeiras iterações, como não há nenhuma informação conhecida do espaço de busca, é realizado uma busca aleatória em cima dos intervalos de hiper-parâmetros, para assim obter resultados que podem ser avaliados.
+
+Após obter alguns resultados com a busca aleatória, o \textit{TPE} é então iniciado. As observações coletadas até então são divididas em dois grupos: o primeiro grupo contém as observações com os melhores \textit{scores} enquanto que o segundo grupo contém o restante das observações. O objetivo é encontrar um conjunto de hiper-parâmetros que é mais provável de estar no primeiro grupo e menos provável de estar no segundo grupo.
+
+O próximo passo é calcular a probabilidade de um candidato estar em cada um dos dois grupos. Dos candidatos já obtidos, o algoritmo tenta encontrar um candidato que é mais provável de ser encontrado no primeiro grupo e menos provável de estar no segundo grupo. A fórmula a seguir define o \textit{Expected Improvement} para cada um dos candidatos:
+
+\[EI(x) = \frac{l(x)}{g(x)}\]
+
+Sendo $l(x)$ é a probabilidade de estar no primeiro grupo e $g(x)$ a probabilidade de estar no segundo grupo.
+
+\begin{figure}[ht]
+\centering
+\caption{Distribuição de probabilidades do algoritmo \textit{TPE}.}
+\includegraphics[width=0.6\textwidth]{imagens/tpe_distribution.png}
+\legend{\small Fonte: \cite{TPEWilliam}}
+\label{fig:tpe_distribution}
+\end{figure}
+
+% ---------------------------------------------------
+% Fim da Fundamentação Teórica 
+% ---------------------------------------------------
+
+% ---------------------------------------------------
+% Metodologia                                        
+% ---------------------------------------------------
+\chapter{Metodologia} \label{metodologia}
+
+Neste capítulo serão apresentadas as técnicas e métodos que serão utilizados para a realização deste trabalho.
+A metodologia consistirá em etapas bem definidas, que são: (1) Aquisição de datasets; (2) Pré-processamento dos datasets adquiridos; (3) Escolha das arquiteturas de CNN para realização dos treinamentos; (4) Definição de espaço de busca de hiper-parâmetros para cada arquitetura utilizada; (5) Treinamento, validação e otimização (execução) das CNNs. A Figura \ref{fig:diagrama_metodologia} apresenta as etapas citadas e descritas nas seções a seguir.
+	
+\begin{figure}[ht]
+\centering
+\caption{Metodologia proposta.}
+\includegraphics[width=1\textwidth]{imagens/diagrama_metodologia.png}
+\legend{\small Fonte: Autor}
+\label{fig:diagrama_metodologia}
+\end{figure}
+
+% ----------------------------------------------------------
+% Inicio Base                         
+% ----------------------------------------------------------
+
+\section{Aquisição de datasets}
+
+Os três datasets que serão utilizados nesse trabalho (JAFFE, CK+ e FER2013) serão reunidos e validados em suas anotações. Os três estão disponíveis publicamente na internet. O dataset JAFFE (Japanese Female Facial Expression) consta com 213 imagens de 10 pessoas de etnia japonesa do sexo feminino. O dataset CK+ (Extended Cohn Kanade), que é um dataset aumentado do CK \cite{kanade2000comprehensive}, consta de 593 sequências de 123 pessoas. A última imagem (expression peak) de cada sequência será utilizada para realizar o treinamento com a emoção determinada pela sua anotação. Por último o FER2013, dataset disponível a partir de um challenge do Kaggle \cite{kaggle} do ano de 2013. Contém mais de 30 mil imagens de rostos in-the-wild e já foi utilizado em trabalhos anteriores. Os tamanhos e formatos de cada dataset diferem um do outro, por isso as arquiteturas que serão construídas obedecerão essas diferenças. Exemplos de imagens dos três datasets citados podem ser vistos nas Figuras \ref{fig:ck_jaffe} e \ref{fig:fer2013}.
+
+\begin{figure}[ht]
+\centering
+\caption{Exemplos de imagens dos datasets CK+ (acima) e JAFFE (abaixo).}
+\includegraphics[width=0.9\textwidth]{imagens/ck_jaffe_example.png}
+\legend{\small Fonte: Adaptado de \cite{pramerdorfer2016facial}}
+\label{fig:ck_jaffe}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\caption{Exemplos de imagens do dataset FER2013.}
+\includegraphics[width=0.6\textwidth]{imagens/fer2013_example.png}
+\legend{\small Fonte: \cite{holder2017improved}}
+\label{fig:fer2013}
+\end{figure}
+
+% ----------------------------------------------------------
+% Início Pré-processamento                            
+% ----------------------------------------------------------
+
+\section{Pré-processamento}
+
+Algumas etapas serão realizadas antes da utilização de cada dataset em CNNs. No dataset JAFFE, as imagens possuem dimensão 256x256 pixels e serão reduzidas para agilizar o processo de treinamento. Também será necessário gerar um arquivo de anotações, pois o dataset não possui um. Cada imagem indica em seu nome de arquivo qual emoção está representada.
+
+\begin{figure}[ht]
+\centering
+\caption{Visualização dos nomes das imagens presentes no dataset JAFFE.}
+\includegraphics[width=0.7\textwidth]{imagens/jaffe_examples.png}
+\legend{\small Fonte: Autor}
+\label{fig:jaffe_label}
+\end{figure}
+
+Por exemplo, na Figura \ref{fig:jaffe_label} é possível visualizar que a sigla após o primeiro ponto no nome de cada arquivo indica a emoção realizada pelo sujeito. FE indica emoção medo, HA indica emoção alegria, SU indica emoção surpresa, e assim por diante. Com isso, o arquivo de anotações será gerado a partir da leitura do nome de cada imagem pertencente ao dataset.
+
+O dataset CK+ disponibiliza as anotações prontas para o pico de expressão em cada sequência de frames. Será necessário apenas reunir cada anotação em um arquivo comum, de forma a facilitar a leitura. As imagens do dataset possuem três canais, por isso serão convertidas para um canal e terão sua dimensão reduzida, também para agilizar o treinamento.
+
+O dataset FER 2013 já foi previamente pré-processado, utilizando-se de um algoritmo de detecção da faces Haar Cascade da biblioteca OpenCV, de forma a eliminar imagens de rostos mal enquadrados ou difíceis de serem detectados. Ainda será realizada uma redução de tamanho do dataset, para apenas metade das imagens serem utilizadas (pouco mais de 10 mil imagens serão mantidas).
+
+% ----------------------------------------------------------
+% Fim Pré-processamento                            
+% ----------------------------------------------------------
+
+\section{Definição de espaço de busca de hiperparâmetros}
+
+O espaço de busca de hiperparâmetros precisa ser construído obedecendo a estrutura do hyperopt. Essa tarefa pode ser feita de várias formas, porém a forma mais comum é instanciar um dict em Python, nomeando cada hiperparâmetro e definindo seu intervalo de busca. 
+
+Um espaço de busca distinto precisará ser construído para cada arquitetura utilizada, devido ao fato das arquiteturas possuírem estrutura própria. Logo, as arquiteturas escolhidas precisam ser bem compreendidas, de forma a selecionar os melhores hiperparâmetros que irão compor o espaço de busca e seus respectivos intervalos. Um exemplo de espaço de busca pode ser visto na Figura \ref{fig:search_space}.
+
+\begin{figure}[ht]
+\centering
+\caption{Exemplo de um espaço de busca definido para uma Multilayer Perceptron.}
+\includegraphics[width=1\textwidth]{imagens/search_space.png}
+\legend{\small Fonte: Autor}
+\label{fig:search_space}
+\end{figure}
+
+\section{Treinamento, validação e otimização dos hiperparâmetros das CNNs}
+
+Na última etapa serão realizados os testes propriamente ditos, de forma a validar a metodologia. As CNNs serão construídas com a API Keras, que será executada no topo da biblioteca de aprendizado de máquina TensorFlow. As execuções serão feitas em GPU, para se obter execuções mais rápidas. Em torno das execuções, a biblioteca hyperopt irá realizar as otimizações adequadas dos hiperparâmetros, a partir do loss obtido em cada execução.
+
+% ---------------------------------------------------
+% Fim Metodologia                                    
+% ---------------------------------------------------
+
+% ---------------------------------------------------
+% Resultados                               
+% ---------------------------------------------------
+
+\chapter{Resultados}
+
+\begin{center}
+====== RESULTADOS DA MONOGRAFIA 1 (reescrever...) ======
+\end{center}
+
+Neste trabalho espera-se validar a metaotimização dos hiperparâmetros de CNNs na tarefa de classificar emoções em rostos humanos. A validação será concluída ao se observar resultados equiparáveis aos que já existem na literatura, para se comprovar que a escolha dos hiperparâmetros pode ser uma tarefa automatizada.
+
+Busca-se também fornecer avanços na tarefa de otimização de hiperparâmetros e resultados melhores no desafio de classificar emoções humanas.
+
+% ---------------------------------------------------
+% Fim Resultados                           
+% ---------------------------------------------------
+
+% ---------------------------------------------------
+% Conclusão                                         
+% ---------------------------------------------------
+
+\chapter{Conclusão}
+% ---------------------------------------------------
+% Fim Conclusão                                         
+% ---------------------------------------------------
+
+\phantompart
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+
+\postextual
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\bibliography{main}
+
+\end{document}
