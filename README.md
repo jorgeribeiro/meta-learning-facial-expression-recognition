@@ -1,15 +1,14 @@
-# Meta-aprendizado aplicado ao Problema de Reconhecimento de Expressões Faciais
+# Meta-learning applied to the Facial Expression Recognition Problem
 
-Este repositório contém os scripts para o meu Trabalho de Conclusão de curso de Ciência da Computação (UFMA), que trata da otimização automática dos hiper-parâmetros de arquiteturas de CNNs que serão responsáveis por reconhecer expressões faciais.
-O trabalho foi feito sob a orientação do Prof. Dr. Geraldo Braz Júnior.
+This repo contains the source code and docs of my Undergraduate Thesis to conclude my Bachelor in Computer Science (UFMA). This work deals with the automatic optimization of CNN's architecture's hyperparameters responsible to recognize facial expressions. This work was developed with the orientation of the Dr. Geraldo Braz Júnior.
 
-O texto do TCC pode ser encontrado dentro da pasta docs.
+The paper of this work can be found inside the docs folder.
 
-## Dependências
+## Dependencies
 - TensorFlow
 - Keras
 - Hyperopt
-- Quiver (para visualização de filtros no script filters_visualization.py)
+- Quiver (filter visualization script: filters_visualization.py)
 
-## Dúvidas e questões?
-Entre em contato comigo, ficarei feliz em ajudar.
+## Questions?
+Get in touch. I am more than happy to help you.
