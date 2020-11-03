@@ -10,5 +10,8 @@ The paper of this research can be found inside the docs folder.
 - Hyperopt
 - Quiver (filter visualization script: filters_visualization.py)
 
+## Link to access Paper in UFMA's Digital library
+https://monografias.ufma.br/jspui/handle/123456789/3540
+
 ## Questions?
 Get in touch. I am more than happy to help you.
